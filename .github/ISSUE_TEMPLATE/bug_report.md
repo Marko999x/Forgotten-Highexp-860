@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **Protocol version**
-7.72/8.00/8.60
+7.72/8.60
 
 **Describe the bug**
 A clear and concise description of what the bug is.
