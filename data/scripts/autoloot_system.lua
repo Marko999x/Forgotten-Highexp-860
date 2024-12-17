@@ -17,7 +17,7 @@ local autolootCache = {}
 local textEditRequests = {}
 
 local function getPlayerLimit(player)
-    return player:isVip() and autoloot.premiumAccountLimit or autoloot.freeAccountLimit
+    return autoloot.premiumAccountLimit or autoloot.freeAccountLimit
 end
 
 local function getPlayerAutolootItems(player)
