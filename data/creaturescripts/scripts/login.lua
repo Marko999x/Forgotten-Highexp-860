@@ -1,6 +1,4 @@
 function onLogin(player)
-	player:loadVipData()
-    player:updateVipTime()
 	player:setCapacity(1000000)
 	
 	local aol = player:getSlotItem(CONST_SLOT_NECKLACE)
