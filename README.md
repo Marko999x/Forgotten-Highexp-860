@@ -20,6 +20,11 @@ g_game.enableFeature(GamePlayerMounts)
 
 g_game.enableFeature(GameClientPing)
 
+g_game.enableFeature(GameExtendedOpcode)
+    
+g_game.enableFeature(GameSpritesU32)
+
+
 ## Server Features
 
 Mounts, Spellcooldown, Offline Training, Modal Window
