@@ -91,7 +91,9 @@
 	<monster name="Lost Dragon" file="monsters/huntings/lost_dragon.xml" />
 
 
-	<!-- Monsters -->
+
+
+
 	<monster name="a carved stone tile" file="monsters/a_carved_stone_tile.xml" />
 	<monster name="Achad" file="monsters/achad.xml" />
 	<monster name="Acid Blob" file="monsters/acid_blob.xml" />
@@ -482,6 +484,7 @@
 	<monster name="Tirecz" file="monsters/tirecz.xml" />
 	<monster name="Toad" file="monsters/toad.xml" />
 	<monster name="Tortoise" file="monsters/tortoise.xml" />
+	<monster name="Training Monk" file="monsters/training_monk.xml" />
 	<monster name="Tremorak" file="monsters/tremorak.xml" />
 	<monster name="Troll Champion" file="monsters/troll_champion.xml" />
 	<monster name="Troll Legionnaire" file="monsters/troll_legionnaire.xml" />
