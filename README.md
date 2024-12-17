@@ -11,9 +11,14 @@ Add the dat/spr under data/things/860
 Enable features in OTCv8 under /modules/game_features/features.lua otherwise you can not login.
 
 g_game.enableFeature(GameIdleAnimations)
+
 g_game.enableFeature(GameOfflineTrainingTime)
+
 g_game.enableFeature(GameEnhancedAnimations)
+
 g_game.enableFeature(GamePlayerMounts)
+
+g_game.enableFeature(GameClientPing)
 
 ## Server Features
 
