@@ -18,7 +18,7 @@ If you find any bug and believe it should be fixed, submit an issue in issues se
 
 ## How to login INGAME
 
-You are supposed to use OTCv8 with the dat & spr I have added
+You are supposed to use OTCv8 with the dat & spr I have added ( 860 - 14x.zip )
 
 Add the dat/spr under data/things/860
 Enable features in OTCv8 under /modules/game_features/features.lua otherwise you can not login.
