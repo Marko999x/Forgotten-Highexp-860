@@ -33,7 +33,7 @@ extern Monsters g_monsters;
 extern Game g_game;
 extern Events* g_events;
 
-static constexpr int32_t MINSPAWN_INTERVAL = 10 * 1000; // 10 seconds to match RME
+static constexpr int32_t MINSPAWN_INTERVAL = 5 * 1000; // 10 seconds to match RME
 static constexpr int32_t MAXSPAWN_INTERVAL = 24 * 60 * 60 * 1000; // 1 day
 
 bool Spawns::loadFromXml(const std::string& filename)
@@ -401,9 +401,9 @@ void Spawn::cleanup()
 		uint32_t spawnId = it->first;
 		Monster* monster = it->second;
 		if (monster->isRemoved()) {
-			if (spawnId != 0) {
-				spawnMap[spawnId].lastSpawn = OTSYS_TIME();
-			}
+			//if (spawnId != 0) {
+			//	spawnMap[spawnId].lastSpawn = OTSYS_TIME();
+			//}
 
 			monster->decrementReferenceCounter();
 			it = spawnedMap.erase(it);

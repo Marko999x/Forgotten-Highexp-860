@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Reborn King" script="reborn_npc.lua" walkinterval="2000" floorchange="0" skull="red" >
+	<health now="100" max="100" />
+	<look type="332" head="39" body="122" legs="125" feet="57" addons="1" />
+	<parameters>
+		<parameter key="message_greet" value="Hi |PLAYERNAME|!, do you want me to {reborn} you?" />
+		<parameter key="message_walkaway" value="Come back soon!" />
+		<parameter key="message_farewell" value="Come back soon!" />
+	</parameters>
+</npc>

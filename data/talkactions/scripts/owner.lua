@@ -14,7 +14,7 @@ function onSay(player, words, param)
 		return false
 	end
 
-	if param == "" or param == "none" then
+	if param == "" or param == "none" or param == "nobody" then
 		house:setOwnerGuid(0)
 		return false
 	end

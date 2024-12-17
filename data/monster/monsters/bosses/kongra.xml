@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Kongra" nameDescription="a kongra" race="blood" experience="0" speed="784">
+	<health now="1200000000" max="1200000000" />
+	<look type="116" corpse="6043" />
+	<targetchange interval="4000" chance="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="10" />
+		<flag canwalkonenergy="0" />
+		<flag canwalkonfire="0" />
+		<flag canwalkonpoison="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-34000000" max="-37000000" />
+	</attacks>
+	<defenses armor="18" defense="18">
+		<defense name="speed" interval="2000" chance="15" speedchange="260" duration="3000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element firePercent="20" />
+		<element earthPercent="10" />
+		<element energyPercent="5" />
+		<element icePercent="-15" />
+		<element deathPercent="-5" />
+	</elements>
+	<voices interval="1000" chance="2">
+		<voice sentence="Hugah!" />
+		<voice sentence="Ungh! Ungh!" />
+		<voice sentence="Huaauaauaauaa!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+	</loot>
+</monster>

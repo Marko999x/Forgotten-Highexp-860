@@ -22,6 +22,7 @@
 // Definitions should be global.
 #include "definitions.h"
 
+#include <fstream>
 #include <algorithm>
 #include <chrono>
 #include <cstdint>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Captain Karlos" script="captain_karlos.lua" walkinterval="2000" floorchange="0">
+    <health now="100" max="100" />
+    <look type="151" head="0" body="0" legs="0" feet="114" addons="3"/>
+	<parameters>
+		<parameter key="message_greet" value="Hello |PLAYERNAME|. I can sail you to {wells} 100+ rebirth for 2 MDC." />
+		<parameter key="message_walkaway" value="How rude!" />
+	</parameters>
+</npc>

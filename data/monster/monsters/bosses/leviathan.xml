@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Leviathan" nameDescription="leviathan" race="blood" experience="0" speed="300">
+	<health now="160000000000" max="160000000000" />
+	<look type="275" corpse="8307" />
+	<targetchange interval="2000" chance="50" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag runonhealth="300" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-3200000000" max="-3400000000" />
+		<attack name="earth" interval="2000" chance="9" length="8" spread="3" min="-1600000000" max="-1700000000">
+			<attribute key="areaEffect" value="bigplants" />
+		</attack>
+		<attack name="ice" interval="2000" chance="7" length="9" spread="3" min="-1600000000" max="-1700000000">
+			<attribute key="areaEffect" value="icearea" />
+		</attack>
+		<attack name="drown" interval="2000" chance="11" radius="4" target="1" min="-1600000000" max="-1700000000">
+			<attribute key="areaEffect" value="bluebubble" />
+		</attack>
+	</attacks>
+	<defenses armor="16" defense="25">
+		<defense name="healing" interval="2000" chance="25" min="200" max="250">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<voices interval="2000" chance="5">
+		<voice sentence="CHHHRRRR" />
+		<voice sentence="HISSSS" />
+	</voices>
+	<elements>
+		<element firePercent="50" />
+		<element firePercent="30" />
+		<element energyPercent="-10" />
+		<element physicalPercent="-20" />
+		<element deathPercent="-10" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+		<immunity paralyze="1" />
+	</immunities>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="6541" countmax="3" chance="50000" /><!-- Exp Eggs -->
+	</loot>
+</monster>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Rebirth Npc" script="reborn_npc.lua" walkinterval="2000" floorchange="0" skull="green" >
+	<health now="100" max="100" />
+	<look type="130" head="39" body="122" legs="125" feet="57" addons="0" />
+	<parameters>
+		<parameter key="message_greet" value="Hi |PLAYERNAME|!, do you want me to {rebirth} you?" />
+		<parameter key="message_walkaway" value="Come back soon!" />
+		<parameter key="message_farewell" value="Come back soon!" />
+	</parameters>
+</npc>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Stupid Skeleton" nameDescription="a stupid skeleton" race="undead" experience="24111" speed="754" manacost="300">
+	<health now="1500000000" max="1500000000" />
+	<look type="33" corpse="5972" />
+	<targetchange interval="2000" chance="0" />
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="1" />
+		<flag pushable="1" />
+		<flag canpushitems="0" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+	<attack name="melee" interval="1000" min="-80000000" max="-82000000" />
+		<attack name="lifedrain" interval="2000" chance="15" range="1" min="-3000000" max="-4000000" />
+	</attacks>
+	<defenses armor="2" defense="9" />
+	<elements>
+		<element holyPercent="-25" />
+		<element deathPercent="25" />
+	</elements>
+	<immunities>
+	</immunities>
+	<loot>
+		<item id="9020" countmax="8" chance="50000" /><!-- Donation Coins -->
+	</loot>
+</monster>

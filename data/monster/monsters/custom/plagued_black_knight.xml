@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Black Knight" nameDescription="a plagued black knight" race="blood" experience="160" speed="700">
+	<health now="32000000000" max="32000000000" />
+	<look type="131" head="95" body="95" legs="95" feet="95" addons="3" corpse="6080" />
+	<targetchange interval="2000" chance="10" />
+	
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-750000000" max="-760000000" />
+		<attack name="physical" interval="2000" chance="20" range="7" min="-340000000" max="-350000000">
+			<attribute key="shootEffect" value="spear" />
+		</attack>
+	</attacks>
+	<defenses armor="25" defense="30" />
+	<voices interval="2000" chance="10">
+		<voice sentence="MINE!" yell="1" />
+		<voice sentence="NO MERCY!" yell="1" />		
+		<voice sentence="No prisoners!" />
+		<voice sentence="By Bolg's Blood!" />
+		<voice sentence="You're no match for me!" />
+	</voices>
+</monster>

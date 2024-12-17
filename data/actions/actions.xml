@@ -44,12 +44,11 @@
 	<action fromid="2666" toid="2691" script="other/food.lua" />
 	<action fromid="2695" toid="2696" script="other/food.lua" />
 	<action fromid="2787" toid="2796" script="other/food.lua" />
-	<action itemid="5097" script="other/food.lua" />
 	<action itemid="6125" script="other/food.lua" />
 	<action fromid="6278" toid="6279" script="other/food.lua" />
 	<action fromid="6393" toid="6394" script="other/food.lua" />
 	<action itemid="6501" script="other/food.lua" />
-	<action fromid="6541" toid="6545" script="other/food.lua" />
+	<action fromid="6543" toid="6545" script="other/food.lua" />
 	<action itemid="6569" script="other/food.lua" />
 	<action itemid="6574" script="other/food.lua" />
 	<action fromid="7158" toid="7159" script="other/food.lua" />
@@ -99,7 +98,7 @@
 	<action fromid="2011" toid="2015" script="other/fluids.lua" />
 	<action itemid="2023" script="other/fluids.lua" />
 	<action fromid="2031" toid="2034" script="other/fluids.lua" />
-	<action fromid="2574" toid="2577" script="other/fluids.lua" />
+	<action fromid="2575" toid="2577" script="other/fluids.lua" />
 	<action itemid="5553" script="other/fluids.lua" />
 
 	<!-- Potions -->

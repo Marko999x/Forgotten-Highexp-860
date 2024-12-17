@@ -132,8 +132,8 @@ class Monster final : public Creature
 		void onCreatureMove(Creature* creature, const Tile* newTile, const Position& newPos, const Tile* oldTile, const Position& oldPos, bool teleport) override;
 		void onCreatureSay(Creature* creature, SpeakClasses type, const std::string& text) override;
 
-		void drainHealth(Creature* attacker, int32_t damage) override;
-		void changeHealth(int32_t healthChange, bool sendHealthChange = true) override;
+		void drainHealth(Creature* attacker, int64_t damage) override;
+		void changeHealth(int64_t healthChange, bool sendHealthChange = true) override;
 
 		bool isWalkingToSpawn() const {
 			return walkingToSpawn;
@@ -149,7 +149,7 @@ class Monster final : public Creature
 		bool challengeCreature(Creature* creature, bool force = false) override;
 
 		void setNormalCreatureLight() override;
-		bool getCombatValues(int32_t& min, int32_t& max) override;
+		bool getCombatValues(int64_t& min, int64_t& max) override;
 
 		void doAttacking(uint32_t interval) override;
 		bool hasExtraSwing() override {
@@ -179,9 +179,12 @@ class Monster final : public Creature
 			return ignoreFieldDamage;
 		}
 
-		BlockType_t blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
+		BlockType_t blockHit(Creature* attacker, CombatType_t combatType, int64_t& damage,
 		                     bool checkDefense = false, bool checkArmor = false, bool field = false, bool ignoreResistances = false) override;
 
+		uint64_t getMonsterExp() { return experience; }
+		void setMonsterExp(uint64_t newExp) { experience = newExp; }
+		
 		static uint32_t monsterAutoID;
 
 	private:
@@ -207,6 +210,7 @@ class Monster final : public Creature
 		int32_t challengeFocusDuration = 0;
 		int32_t stepDuration = 0;
 
+		uint64_t experience = 0;
 		Position masterPos;
 
 		bool ignoreFieldDamage = false;
@@ -264,7 +268,7 @@ class Monster final : public Creature
 		bool isOpponent(const Creature* creature) const;
 
 		uint64_t getLostExperience() const override {
-			return skillLoss ? mType->info.experience : 0;
+			return skillLoss ? experience : 0;
 		}
 		uint16_t getLookCorpse() const override {
 			return mType->info.lookcorpse;

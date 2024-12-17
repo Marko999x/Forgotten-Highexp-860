@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Big Boss" nameDescription="a big boss" race="blood" experience="150" speed="170">
+	<health now="500000000" max="500000000" />
+	<look type="23" corpse="5981" />
+	<targetchange interval="5000" chance="8" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="4" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-7000000" max="-8000000" />
+		<attack name="energy" interval="2000" chance="15" range="7" target="1" min="-3000000" max="-4000000">
+			<attribute key="shootEffect" value="energyball" />
+			<attribute key="areaEffect" value="energy" />
+		</attack>
+		<attack name="fire" interval="2000" chance="10" range="7" radius="1" target="1" min="-3000000" max="-4000000">
+			<attribute key="shootEffect" value="fire" />
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="energyfield" interval="2000" chance="12" range="7" radius="1" target="1">
+			<attribute key="shootEffect" value="energy" />
+		</attack>
+	</attacks>
+	<defenses armor="18" defense="20" />
+	<elements>
+		<element energyPercent="20" />
+		<element earthPercent="20" />
+		<element holyPercent="10" />
+		<element icePercent="-10" />
+		<element deathPercent="-5" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="5000" chance="10">
+		<voice sentence="Learrn tha secrret uf deathhh!" />
+		<voice sentence="Kaplar!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

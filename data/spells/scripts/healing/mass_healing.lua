@@ -7,9 +7,13 @@ combat:setArea(createCombatArea(AREA_CIRCLE3X3))
 local healMonsters = false
 
 function onTargetCreature(creature, target)
-	local player = creature:getPlayer()
-	local min = (player:getLevel() / 5) + (player:getMagicLevel() * 4.6) + 100
-	local max = (player:getLevel() / 5) + (player:getMagicLevel() * 9.6) + 125
+	if creature:isPlayer() then
+		local min = (creature:getLevel() / 5) + (creature:getMagicLevel() * 4.6) + 100
+		local max = (creature:getLevel() / 5) + (creature:getMagicLevel() * 9.6) + 125
+	else
+		local min = 1000
+		local max = 1200
+	end
 
 	if not healMonsters then
 		local master = target:getMaster()

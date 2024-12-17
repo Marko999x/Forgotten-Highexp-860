@@ -878,13 +878,13 @@ MonsterType* Monsters::loadMonster(const std::string& file, const std::string& m
 	pugi::xml_node node;
 	if ((node = monsterNode.child("health"))) {
 		if ((attr = node.attribute("now"))) {
-			mType->info.health = pugi::cast<int32_t>(attr.value());
+			mType->info.health = pugi::cast<int64_t>(attr.value());
 		} else {
 			std::cout << "[Error - Monsters::loadMonster] Missing health now. " << file << std::endl;
 		}
 
 		if ((attr = node.attribute("max"))) {
-			mType->info.healthMax = pugi::cast<int32_t>(attr.value());
+			mType->info.healthMax = pugi::cast<int64_t>(attr.value());
 		} else {
 			std::cout << "[Error - Monsters::loadMonster] Missing health max. " << file << std::endl;
 		}
@@ -941,7 +941,7 @@ MonsterType* Monsters::loadMonster(const std::string& file, const std::string& m
 				}
 				mType->info.targetDistance = targetDistance;
 			} else if (strcasecmp(attrName, "runonhealth") == 0) {
-				mType->info.runAwayHealth = pugi::cast<int32_t>(attr.value());
+				mType->info.runAwayHealth = pugi::cast<int64_t>(attr.value());
 			} else if (strcasecmp(attrName, "hidehealth") == 0) {
 				mType->info.hiddenHealth = attr.as_bool();
 			} else if (strcasecmp(attrName, "canwalkonenergy") == 0) {
@@ -1011,6 +1011,10 @@ MonsterType* Monsters::loadMonster(const std::string& file, const std::string& m
 			mType->info.outfit.lookTypeEx = pugi::cast<uint16_t>(attr.value());
 		} else {
 			std::cout << "[Warning - Monsters::loadMonster] Missing look type/typeex. " << file << std::endl;
+		}
+
+		if ((attr = node.attribute("mount"))) {
+			mType->info.outfit.lookMount = pugi::cast<uint16_t>(attr.value());
 		}
 
 		if ((attr = node.attribute("corpse"))) {

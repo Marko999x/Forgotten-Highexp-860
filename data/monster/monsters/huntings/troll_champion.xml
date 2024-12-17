@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Troll Champion" nameDescription="a troll champion" race="blood" experience="0" speed="720" manacost="350">
+	<health now="5000000" max="5000000" />
+	<look type="281" corpse="7926" />
+	<targetchange interval="2000" chance="0" />
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="1" />
+		<flag pushable="1" />
+		<flag canpushitems="0" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag runonhealth="20" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-20000" max="-30000" />
+	</attacks>
+	<defenses armor="6" defense="8" />
+	<elements>
+		<element energyPercent="15" />
+		<element holyPercent="10" />
+		<element earthPercent="-10" />
+		<element deathPercent="-10" />
+	</elements>
+	<voices interval="5000" chance="10">
+		<voice sentence="Meee maity!" />
+		<voice sentence="Grrrr" />
+		<voice sentence="Whaaaz up!?" />
+		<voice sentence="Gruntz!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="2" chance="50000" /><!-- Donation Coins -->
+	</loot>
+</monster>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Conan" nameDescription="a conan" race="blood" experience="0" speed="788" manacost="450">
+	<health now="2400000000" max="2400000000" />
+	<look type="253" head="115" body="105" legs="120" feet="132" corpse="6080"/>
+	<targetchange interval="2000" chance="0" />
+	
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="1" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag staticattack="70" />
+		<flag lightlevel="0" />
+		<flag lightcolor="0" />
+		<flag targetdistance="1" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-84000000" max="-88000000" />
+	</attacks>
+	<defenses armor="30" defense="30" />
+	<elements>
+		<element icePercent="50" />
+		<element holyPercent="10" />
+		<element energyPercent="20" />
+		<element physicalPercent="10" />
+		<element earthPercent="-10" />
+		<element deathPercent="-5" />
+	</elements>
+	<immunities>
+		<immunity drunk="1" />
+		<immunity paralyze="1" />
+	</immunities>
+	<voices interval="2000" chance="10">
+		<voice sentence="You will become my trophy." />
+		<voice sentence="Fight harder, coward." />
+		<voice sentence="Show that you are a worthy opponent." />
+	</voices>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+	</loot>
+</monster>

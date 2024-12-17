@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Cyclops" nameDescription="a plagued cyclops" race="blood" experience="21" speed="200" manacost="490">
+	<health now="400000000" max="400000000" />
+	<look type="22" corpse="5962" />
+	<targetchange interval="5000" chance="8" />
+	
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="1" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-7000000" max="-8000000" />
+	</attacks>
+	<defenses armor="15" defense="20" />
+	<elements>
+		<element energyPercent="25" />
+		<element holyPercent="20" />
+		<element earthPercent="-10" />
+		<element deathPercent="-10" />
+	</elements>
+	<voices interval="5000" chance="10">
+		<voice sentence="Il lorstok human!" />
+		<voice sentence="Toks utat." />
+		<voice sentence="Human, uh whil dyh!" />
+		<voice sentence="Youh ah trak!" />
+		<voice sentence="Let da mashing begin!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

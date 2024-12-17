@@ -137,9 +137,9 @@ class MonsterType
 		int32_t creatureSayEvent = -1;
 		int32_t thinkEvent = -1;
 		int32_t targetDistance = 1;
-		int32_t runAwayHealth = 0;
-		int32_t health = 100;
-		int32_t healthMax = 100;
+		int64_t runAwayHealth = 0;
+		int64_t health = 100;
+		int64_t healthMax = 100;
 		int32_t changeTargetChance = 0;
 		int32_t defense = 0;
 		int32_t armor = 0;

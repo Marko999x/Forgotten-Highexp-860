@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Fire Overlord" nameDescription="a plagued fire overlord" race="fire" experience="30111" speed="700">
+	<health now="800000000" max="800000000" />
+	<look type="243" corpse="8964" />
+	<targetchange interval="2000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-80000000" max="-82000000" />
+		<attack name="firefield" interval="2000" chance="40" range="7" target="1">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+		<attack name="speed" interval="2000" chance="25" target="0" radius="6" speedchange="-700">
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+		<attack name="fire" interval="2000" chance="30" length="6" spread="0" min="-4000000" max="-5000000">
+			<attribute key="areaEffect" value="firearea" />
+		</attack>
+	</attacks>
+	<defenses armor="25" defense="25" />
+	<elements>
+		<element physicalPercent="25" />
+		<element energyPercent="20" />
+		<element icePercent="-25" />
+		<element deathPercent="20" />
+		<element earthPercent="30" />
+		<element firePercent="35" />
+		<element holyPercent="35" />
+	</elements>
+	<immunities>
+		<immunity lifedrain="1" />
+		<immunity paralyze="1" />
+		<immunity outfit="1" />
+		<immunity drunk="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<loot>
+		<item id="9020" countmax="4" chance="20000" /><!-- Donation Coins -->
+	</loot>
+</monster>

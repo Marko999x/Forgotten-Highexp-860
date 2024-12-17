@@ -1,3 +1,5 @@
+local FOREVER_AOL = 2196
+
 function onDeath(player, corpse, killer, mostDamageKiller, lastHitUnjustified, mostDamageUnjustified)
 	if player:hasFlag(PlayerFlag_NotGenerateLoot) or player:getVocation():getId() == VOCATION_NONE then
 		return true
@@ -21,6 +23,9 @@ function onDeath(player, corpse, killer, mostDamageKiller, lastHitUnjustified, m
 		if not isPlayer or not player:hasBlessing(6) then
 			player:removeItem(ITEM_AMULETOFLOSS, 1, -1, false)
 		end
+	elseif amulet and amulet.itemid == FOREVER_AOL then
+		player:say('FOREVER AOL! NO LOOT FOR YOU!', TALKTYPE_MONSTER_SAY)
+		player:getPosition():sendMagicEffect(CONST_ME_HOLYAREA)
 	else
 		for i = CONST_SLOT_HEAD, CONST_SLOT_AMMO do
 			local item = player:getSlotItem(i)

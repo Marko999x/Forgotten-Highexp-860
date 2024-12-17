@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<monster name="Target Dummy" nameDescription="a target dummy" race="energy" experience="0" speed="0">
+	<health now="1000000" max="1000000" />
+	<look type="304" corpse="9801" />
+	<targetchange interval="4000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="0" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+		<flag canwalkonenergy="0" />
+		<flag canwalkonfire="0" />
+		<flag canwalkonpoison="0" />
+	</flags>
+	<attacks>
+		<attack name="physical" interval="1000" chance="100" radius="3" target="0" min="0" max="-1" />
+	</attacks>
+	<defenses armor="0" defense="0">
+		<defense name="healing" interval="3000" chance="10" min="150" max="250">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<immunities>
+		<immunity invisible="1" />
+		<immunity paralyze="1" />
+	</immunities>
+	<script>
+		<event name="targetDummy" />
+	</script>
+	<voices interval="1000" chance="2">
+		<voice sentence="I hope you are enjoying your sparring Sir or Ma'am!" />
+		<voice sentence="Threat level rising!" />
+		<voice sentence="Engaging in hostile interaction!" />
+		<voice sentence="Rrrtttarrrttarrrtta" />
+		<voice sentence="Please feel free to hit me Sir or Ma'am!" />
+		<voice sentence="klonk klonk klonk" />
+		<voice sentence="Self-diagnosis running." />
+		<voice sentence="Battle simulation proceeding." />
+		<voice sentence="Repairs initiated!" />
+	</voices>
+</monster>

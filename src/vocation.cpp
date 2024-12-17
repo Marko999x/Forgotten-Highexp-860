@@ -167,5 +167,5 @@ uint64_t Vocation::getReqMana(uint32_t magLevel)
 	if (magLevel == 0) {
 		return 0;
 	}
-	return 1600 * std::pow(manaMultiplier, static_cast<int32_t>(magLevel - 1));
+	return 16000 * std::pow(manaMultiplier, static_cast<int32_t>(magLevel - 1));
 }

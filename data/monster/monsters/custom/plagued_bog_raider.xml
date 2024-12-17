@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Bog Raider" nameDescription="a plagued bog raider" race="venom" experience="800" speed="300">
+	<health now="450000000" max="450000000" />
+	<look type="299" corpse="8951" />
+	<targetchange interval="6000" chance="0" />
+	
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag staticattack="15" />
+		<flag targetdistance="1" />
+		<flag runonhealth="1" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-7000000" max="-8000000" />
+		<attack name="lifedrain" interval="2000" chance="11" min="-3000000" max="-4000000" range="7" target="1">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+		<attack name="physical" interval="2000" chance="10" radius="3" target="0" min="-3000000" max="-4000000">
+			<attribute key="shootEffect" value="smallearth" />
+		</attack>
+		<attack name="poison" interval="2000" chance="13" min="-3000000" max="-4000000" range="7" target="1">
+			<attribute key="shootEffect" value="poison" />
+			<attribute key="areaEffect" value="poison" />
+		</attack>
+		<attack name="speed" interval="2000" chance="8" range="7" target="1" speedchange="-220" duration="5000">
+			<attribute key="shootEffect" value="poison" />
+			<attribute key="areaEffect" value="smallplants" />
+		</attack>
+	</attacks>
+	<defenses armor="10" defense="15">
+		<defense name="healing" interval="2000" chance="15" min="65" max="95">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element energyPercent="-10" />
+		<element earthPercent="30" />
+		<element icePercent="-5" />
+		<element physicalPercent="-5" />
+		<element holyPercent="-5" />
+		<element deathPercent="5" />
+		<element firePercent="85" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="2000" chance="5">
+		<voice sentence="Tchhh!" />
+		<voice sentence="Slurp!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

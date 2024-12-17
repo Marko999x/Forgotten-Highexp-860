@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Elder Beholder" nameDescription="a plagued elder beholder" race="blood" experience="280" speed="770">
+	<health now="1250000000" max="1250000000" />
+	<look type="108" corpse="6037" />
+	<targetchange interval="2000" chance="10" />
+	
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="4" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-160000000" max="-170000000" />
+		<attack name="lifedrain" interval="2000" chance="15" range="7" min="-130000000" max="-135000000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+		<attack name="manadrain" interval="2000" chance="15" range="7" min="-130000000" max="-135000000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+		<attack name="speed" interval="2000" chance="20" range="7" speedchange="-600" duration="20000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+		<attack name="fire" interval="2000" chance="100" range="7" min="-130000000" max="-135000000">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+		<attack name="energy" interval="2000" chance="100" range="7" min="-130000000" max="-135000000">
+			<attribute key="shootEffect" value="energy" />
+		</attack>
+		<attack name="physical" interval="2000" chance="100" range="7" min="-130000000" max="-135000000">
+			<attribute key="shootEffect" value="suddendeath" />
+			<attribute key="areaEffect" value="mortarea" />
+		</attack>
+		<attack name="poison" interval="2000" chance="100" range="7" min="-30000000" max="-35000000">
+			<attribute key="shootEffect" value="poison" />
+		</attack>
+	</attacks>
+	<defenses armor="13" defense="26" />
+	<elements>
+		<element energyPercent="20" />
+		<element icePercent="30" />
+		<element deathPercent="30" />
+		<element firePercent="-10" />
+	</elements>
+	<immunities>
+		<immunity lifedrain="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<summons maxSummons="6">
+		<summon name="Gazer" interval="2000" chance="20" max="6" />
+		<summon name="Crypt Shambler" interval="2000" chance="20" max="6" />
+	</summons>
+	<voices interval="2000" chance="10">
+		<voice sentence="Let me take a look at you!" />
+		<voice sentence="Inferior creatures, bow before my power!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="50" chance="10000" /><!-- Donation Coins -->
+		<item id="10760" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

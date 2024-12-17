@@ -6,7 +6,7 @@ function onSay(player, words, param)
 
 	for _, targetPlayer in ipairs(players) do
 		if player:canSeeCreature(targetPlayer) then
-			table.insert(onlineList, ("%s [%d]"):format(targetPlayer:getName(), targetPlayer:getLevel()))
+			table.insert(onlineList, ("%s [%d]"):format(targetPlayer:getName(), targetPlayer:getReborn()))
 		end
 	end
 

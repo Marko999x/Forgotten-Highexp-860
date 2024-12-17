@@ -1,15 +1,36 @@
+local rates = {
+	{range = {0, 9},rate = 1000},
+    {range = {10, 19},rate = 9000},
+    {range = {20, 29},rate = 8000},
+    {range = {30, 39},rate = 7000},
+    {range = {40, 49},rate = 6000},
+    {range = {50, 59},rate = 5000},
+    {range = {60, 69},rate = 4000},
+	{range = {70, 79},rate = 3000},
+    {range = {80, 89},rate = 2000},
+    {range = {90, 99},rate = 1000},
+}
+
 function Player:onLook(thing, position, distance)
 	local description = ""
 	if hasEventCallback(EVENT_CALLBACK_ONLOOK) then
 		description = EventCallback(EVENT_CALLBACK_ONLOOK, self, thing, position, distance, description)
+		if thing:isPlayer() then
+			description = description .."\n"
+			description = description .."Has reborned: "..thing:getReborn().." times."
+		end
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
 
-function Player:onLookInBattleList(creature, distance)
+function Player:onLookInBattleList(thing, distance)
 	local description = ""
 	if hasEventCallback(EVENT_CALLBACK_ONLOOKINBATTLELIST) then
-		description = EventCallback(EVENT_CALLBACK_ONLOOKINBATTLELIST, self, creature, distance, description)
+		description = EventCallback(EVENT_CALLBACK_ONLOOKINBATTLELIST, self, thing, distance, description)
+		if thing:isPlayer() then
+			description = description .."\n"
+			description = description .."Has reborned: "..thing:getReborn().." times."
+		end
 	end
 	self:sendTextMessage(MESSAGE_INFO_DESCR, description)
 end
@@ -64,10 +85,22 @@ function Player:onReportBug(message, position, category)
 end
 
 function Player:onTurn(direction)
+	local times = {}
+    if not self:getGroup():getAccess() then
+		return true
+    end
+    local cid = self:getId()
+    if (self:getDirection() == direction) or times[cid] and (os.mtime() - times[cid] < 100) then
+        local pos = self:getPosition()
+        pos:getNextPosition(direction)
+        self:teleportTo(pos, true)
+        times[cid] = os.mtime()
+    end
 	if hasEventCallback(EVENT_CALLBACK_ONTURN) then
 		return EventCallback(EVENT_CALLBACK_ONTURN, self, direction)
+	else
+		return true
 	end
-	return true
 end
 
 function Player:onTradeRequest(target, item)
@@ -137,6 +170,15 @@ function Player:onGainExperience(source, exp, rawExp)
 		self:addCondition(soulCondition)
 	end
 
+	-- Reborn Stuff
+	local rebornLvl = self:getReborn()
+	for _,thing in pairs(rates) do
+		if rebornLvl >= thing.range[1] and rebornLvl <= thing.range[2] then
+			exp = exp * thing.rate
+			break
+		end
+	end
+	
 	-- Apply experience stage multiplier
 	exp = exp * Game.getExperienceStage(self:getLevel())
 

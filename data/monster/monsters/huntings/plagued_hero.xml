@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Hero" nameDescription="a plagued hero" race="blood" experience="23111" speed="280">
+	<health now="1500000000" max="1500000000" />
+	<look type="73" corpse="6080" />
+	<targetchange interval="2000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-80000000" max="-82000000" />
+		<attack name="physical" interval="2000" chance="25" range="7" min="0" max="-120">
+			<attribute key="shootEffect" value="arrow" />
+		</attack>
+	</attacks>
+	<defenses armor="30" defense="20">
+		<defense name="healing" interval="2000" chance="20" min="100" max="200">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element energyPercent="20" />
+		<element icePercent="10" />
+		<element firePercent="25" />
+		<element holyPercent="30" />
+		<element earthPercent="30" />
+		<element physicalPercent="10" />
+		<element deathPercent="-20" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="2000" chance="10">
+		<voice sentence="Let's have a fight!" />
+		<voice sentence="Welcome to my battleground." />
+		<voice sentence="Have you seen princess Lumelia?" />
+		<voice sentence="I will sing a tune at your grave." />
+	</voices>
+	<loot>
+		<item id="9020" countmax="8" chance="50000" /><!-- Donation Coins -->
+	</loot>
+</monster>

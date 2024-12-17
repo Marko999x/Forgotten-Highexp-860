@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Mr Rabbit" nameDescription="a mr rabbit" race="blood" experience="0" speed="184" manacost="220">
+	<health now="40000000000" max="40000000000" />
+	<look type="262" corpse="7338" />
+	<targetchange interval="2000" chance="20" />
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="1" />
+		<flag pushable="0" />
+		<flag canpushitems="0" />
+		<flag staticattack="50" />
+		<flag lightlevel="0" />
+		<flag lightcolor="0" />
+		<flag targetdistance="6" />
+		<flag runonhealth="0" />
+	</flags>
+	<defenses armor="6" defense="7" />
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Sibang" nameDescription="a sibang" race="blood" experience="105" speed="714">
+	<health now="15000000000" max="15000000000" />
+	<look type="118" corpse="6045" />
+	<targetchange interval="2000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="4" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-350000000" max="-360000000" />
+		<attack name="physical" interval="2000" chance="40" range="7" min="-170000000" max="-180000000">
+			<attribute key="shootEffect" value="smallstone" />
+		</attack>
+	</attacks>
+	<defenses armor="15" defense="12">
+		<defense name="speed" interval="2000" chance="15" speedchange="306" duration="3000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element firePercent="25" />
+		<element holyPercent="10" />
+		<element icePercent="-15" />
+		<element deathPercent="-5" />
+	</elements>
+	<immunities>
+		<immunity lifedrain="0" />
+		<immunity paralyze="0" />
+		<immunity outfit="1" />
+		<immunity drunk="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="2000" chance="10">
+		<voice sentence="Eeeeek! Eeeeek" />
+		<voice sentence="Huh! Huh! Huh!" />
+		<voice sentence="Ahhuuaaa!" />
+	</voices>
+</monster>

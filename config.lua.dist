@@ -2,17 +2,17 @@
 -- NOTE: valid values for worldType are: "pvp", "no-pvp" and "pvp-enforced"
 worldType = "pvp"
 hotkeyAimbotEnabled = true
-protectionLevel = 1
+protectionLevel = 1000
 killsToRedSkull = 3
 killsToBlackSkull = 6
-pzLocked = 60000
-removeChargesFromRunes = true
+pzLocked = 15000
+removeChargesFromRunes = false
 removeChargesFromPotions = true
 removeWeaponAmmunition = true
 removeWeaponCharges = true
 timeToDecreaseFrags = 24 * 60 * 60
-whiteSkullTime = 15 * 60
-stairJumpExhaustion = 2000
+whiteSkullTime = 1 * 15
+stairJumpExhaustion = 500
 experienceByKillingPlayers = false
 expFromPlayersLevelRange = 75
 pzLockSkullAttacker = false
@@ -26,14 +26,14 @@ loginProtocolPort = 7171
 gameProtocolPort = 7172
 statusProtocolPort = 7171
 maxPlayers = 0
-motd = "Welcome to The Forgotten Server!"
+motd = "Welcome to the Forgotten Highexp server!"
 onePlayerOnlinePerAccount = true
 allowClones = false
 allowWalkthrough = true
-serverName = "Forgotten"
+serverName = "Forgotten Highexp"
 statusTimeout = 5000
 replaceKickOnLogin = true
-maxPacketsPerSecond = 25
+maxPacketsPerSecond = 100
 
 -- Deaths
 -- NOTE: Leave deathLosePercent as -1 if you want to use the default
@@ -53,12 +53,12 @@ onlyInvitedCanMoveHouseItems = true
 
 -- Item Usage
 timeBetweenActions = 200
-timeBetweenExActions = 1000
+timeBetweenExActions = 100
 
 -- Map
 -- NOTE: set mapName WITHOUT .otbm at the end
-mapName = "forgotten"
-mapAuthor = "Komic"
+mapName = "theend"
+mapAuthor = "Administrator"
 
 -- Market
 marketOfferDuration = 30 * 24 * 60 * 60
@@ -68,9 +68,9 @@ maxMarketOffersAtATimePerPlayer = 100
 
 -- MySQL
 mysqlHost = "127.0.0.1"
-mysqlUser = "forgottenserver"
+mysqlUser = ""
 mysqlPass = ""
-mysqlDatabase = "forgottenserver"
+mysqlDatabase = ""
 mysqlPort = 3306
 mysqlSock = ""
 
@@ -81,12 +81,12 @@ mysqlSock = ""
 -- NOTE: forceMonsterTypesOnLoad loads all monster types on startup to validate them.
 -- You can disable it to save some memory if you don't see any errors at startup.
 allowChangeOutfit = true
-freePremium = false
+freePremium = true
 kickIdlePlayerAfterMinutes = 15
 maxMessageBuffer = 4
-emoteSpells = false
-classicEquipmentSlots = false
-classicAttackSpeed = false
+emoteSpells = true
+classicEquipmentSlots = true
+classicAttackSpeed = true
 showScriptsLogInConsole = false
 showOnlineStatusInCharlist = false
 yellMinimumLevel = 2
@@ -117,28 +117,38 @@ serverSaveNotifyMessage = true
 serverSaveNotifyDuration = 5
 serverSaveCleanMap = false
 serverSaveClose = false
-serverSaveShutdown = true
+serverSaveShutdown = false
 
 -- Experience stages
 -- NOTE: to use a flat experience multiplier, set experienceStages to nil
 -- minlevel and multiplier are MANDATORY
 -- maxlevel is OPTIONAL, but is considered infinite by default
 -- to disable stages, create a stage with minlevel 1 and no maxlevel
+
 experienceStages = {
-	{ minlevel = 1, maxlevel = 8, multiplier = 7 },
-	{ minlevel = 9, maxlevel = 20, multiplier = 6 },
-	{ minlevel = 21, maxlevel = 50, multiplier = 5 },
-	{ minlevel = 51, maxlevel = 100, multiplier = 4 },
-	{ minlevel = 101, multiplier = 3 }
+	{ minlevel = 1, maxlevel = 100000, multiplier = 70000 },
+	{ minlevel = 100001, maxlevel = 200000, multiplier = 60000 },
+	{ minlevel = 200001, maxlevel = 300000, multiplier = 50000 },
+	{ minlevel = 300001, maxlevel = 400000, multiplier = 40000 },
+	{ minlevel = 400001, maxlevel = 500000, multiplier = 30000 },
+	{ minlevel = 500001, maxlevel = 600000, multiplier = 20000 },
+	{ minlevel = 600001, maxlevel = 717217, multiplier = 10000 },
 }
 
 -- Rates
 -- NOTE: rateExp is not used if you have enabled stages above
 rateExp = 5
-rateSkill = 3
+rateSkill = 4
 rateLoot = 2
 rateMagic = 3
 rateSpawn = 1
+
+-- Reborn Stuff 
+instantReborn = false -- Rebirth automatic when max level has been reached
+instantRebornLevel = 0 -- instant reborn level but can be only used if you use the same max level all the time if not you can use onAdvance with player:doReborn()
+scale_1 = 50000 -- Amount of extra levels for reborn
+scale_2 = 10 -- Amount of reborn for extra level after 10 rebirth player need 50k more levels ( scale 1 )
+scale_3 = 717217 -- Max Level at start ( max level at rebirth 0 to what ever you set at scale 2 & 3 to be next max level)
 
 -- Monster Despawn Config
 -- despawnRange is the amount of floors a monster can be from its spawn position
@@ -151,7 +161,7 @@ removeOnDespawn = true
 walkToSpawnRadius = 15
 
 -- Stamina
-staminaSystem = true
+staminaSystem = false
 
 -- Scripts
 warnUnsafeScripts = true

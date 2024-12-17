@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Hellgorak" nameDescription="a hellgorak" race="blood" experience="0" speed="730">
+	<health now="120000000000" max="120000000000" />
+	<look type="12" head="19" body="96" legs="21" feet="81" corpse="6068" />
+	<targetchange interval="2000" chance="10" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="85" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-2600000000" max="-2800000000" />
+		<attack name="energy" interval="2000" chance="20" length="8" spread="0" max="-3700">
+			<attribute key="areaEffect" value="purpleenergy" />
+		</attack>
+		<attack name="fire" interval="2000" chance="25" range="7" min="-1300000000" max="-1350000000">
+			<attribute key="shootEffect" value="fire" />
+		</attack>
+		<attack name="energy" interval="2000" chance="40" range="1" target="1" min="-1300000000" max="-1350000000">
+			<attribute key="areaEffect" value="purpleenergy" />
+		</attack>
+	</attacks>
+	<defenses armor="70" defense="65" />
+	<elements>
+		<element physicalPercent="10" />
+		<element icePercent="10" />
+		<element energyPercent="10" />
+		<element earthPercent="10" />
+		<element holyPercent="10" />
+		<element deathPercent="10" />
+		<element firePercent="10" />
+		<element drownPercent="-10" />
+	</elements>
+	<immunities>
+		<immunity lifedrain="1" />
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="2000" chance="0">
+		<voice sentence="I'll sacrifice yours souls to seven!" />
+		<voice sentence="I'm bad news for you mortals!" />
+		<voice sentence="No man can defeat me!" />
+		<voice sentence="Your puny skills are no match for me." />
+		<voice sentence="I smell your fear." />
+		<voice sentence="Delicious!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="6541" countmax="3" chance="50000" /><!-- Exp Eggs -->
+	</loot>
+</monster>

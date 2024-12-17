@@ -4,10 +4,10 @@ ec.onLookInBattleList = function(self, creature, distance)
 	local description = "You see " .. creature:getDescription(distance)
 	if self:getGroup():getAccess() then
 		local str = "%s\nHealth: %d / %d"
+		description = description .. "\nHealth: ".. creature:getHealth() .." / ".. creature:getMaxHealth()..""
 		if creature:isPlayer() and creature:getMaxMana() > 0 then
-			str = string.format("%s, Mana: %d / %d", str, creature:getMana(), creature:getMaxMana())
+			description = description .. ", Mana: ".. creature:getMana() .." / ".. creature:getMaxMana() ..""
 		end
-		description = string.format(str, description, creature:getHealth(), creature:getMaxHealth()) .. "."
 
 		local position = creature:getPosition()
 		description = string.format(

@@ -57,9 +57,9 @@ local reloadTypes = {
 }
 
 function onSay(player, words, param)
-	if not player:getGroup():getAccess() then
-		return true
-	end
+	--if not player:getGroup():getAccess() then
+	--	return true
+	--end
 
 	if player:getAccountType() < ACCOUNT_TYPE_GOD then
 		return false
@@ -73,9 +73,12 @@ function onSay(player, words, param)
 		return false
 	end
 
-	-- need to clear EventCallback.data or we end up having duplicated events on /reload scripts
-	if table.contains({RELOAD_TYPE_SCRIPTS, RELOAD_TYPE_ALL}, reloadType) then
-		EventCallback:clear()
+	-- need to clear EventCallbackData or we end up having duplicated events on /reload scripts
+	if reloadType == RELOAD_TYPE_SCRIPTS or reloadType == RELOAD_TYPE_ALL then
+		EventCallbackData = {}
+		for i = 1, EVENT_CALLBACK_LAST do
+			EventCallbackData[i] = {}
+		end
 	end
 
 	Game.reload(reloadType)

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Earth Elemental" nameDescription="an earth elemental" race="undead" experience="0" speed="730">
+	<health now="400000000" max="400000000" />
+	<look type="301" corpse="8933" />
+	<targetchange interval="20000" chance="50" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="0" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag staticattack="80" />
+		<flag lightlevel="0" />
+		<flag lightcolor="0" />
+		<flag targetdistance="1" />
+		<flag runonhealth="1" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-11000000" max="-12500000" />
+		<attack name="poison" interval="2000" chance="100" range="7" target="1" min="-5000000" max="-5400000">
+			<attribute key="shootEffect" value="poison" />
+			<attribute key="areaEffect" value="poison" />	
+		</attack>
+		<attack name="physical" interval="2000" chance="8" range="7" target="1" radius="3" min="-5000000" max="-5400000">
+			<attribute key="shootEffect" value="largerock" />
+			<attribute key="areaEffect" value="plantattack" />
+		</attack>
+		<attack name="poisoncondition" interval="2000" chance="7" length="6" spread="0" min="-25" max="-27">
+			<attribute key="areaEffect" value="poison" />
+		</attack>
+		<attack name="poisoncondition" interval="2000" chance="12" target="1" range="7" min="-25" max="-27">
+			<attribute key="shootEffect" value="poison" />
+			<attribute key="areaEffect" value="poison" />
+		</attack>
+		<attack name="speed" interval="2000" chance="20" range="7" target="1" speedchange="-330" duration="5000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+	</attacks>
+	<defenses armor="30" defense="30">
+		<defense name="healing" interval="2000" chance="10" min="50" max="80">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>	
+	</defenses>
+	<elements>
+		<element deathPercent="40" />
+		<element icePercent="40" />
+		<element physicalPercent="30" />
+		<element earthPercent="50" />
+		<element energyPercent="50" />
+		<element firePercent="-25" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+	</loot>
+</monster>

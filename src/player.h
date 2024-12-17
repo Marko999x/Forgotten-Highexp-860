@@ -34,6 +34,7 @@
 #include "guild.h"
 #include "groups.h"
 #include "town.h"
+#include "mounts.h"
 
 #include <bitset>
 
@@ -97,8 +98,8 @@ struct Skill {
 
 using MuteCountMap = std::map<uint32_t, uint32_t>;
 
-static constexpr int32_t PLAYER_MAX_SPEED = 1500;
-static constexpr int32_t PLAYER_MIN_SPEED = 10;
+static constexpr int32_t PLAYER_MAX_SPEED = 10;
+static constexpr int32_t PLAYER_MIN_SPEED = 1500;
 
 class Player final : public Creature, public Cylinder
 {
@@ -140,6 +141,17 @@ class Player final : public Creature, public Cylinder
 			return CREATURETYPE_PLAYER;
 		}
 
+        uint8_t getCurrentMount() const;
+		void setCurrentMount(uint8_t mountId);
+		bool isMounted() const {
+			return defaultOutfit.lookMount != 0;
+		}
+		bool toggleMount(bool mount);
+		bool tameMount(uint8_t mountId);
+		bool untameMount(uint8_t mountId);
+		bool hasMount(const Mount* mount) const;
+		void dismount();
+
 		void sendFYIBox(const std::string& message) {
 			if (client) {
 				client->sendFYIBox(message);
@@ -161,12 +173,28 @@ class Player final : public Creature, public Cylinder
 		void kickPlayer(bool displayEffect);
 
 		static uint64_t getExpForLevel(const uint64_t lv) {
-			return (((lv - 6ULL) * lv + 17ULL) * lv - 12ULL) / 6ULL * 100ULL;
+			//return (((lv - 6ULL) * lv + 17ULL) * lv - 12ULL) / 6ULL * 100ULL;
+			return (lv * 123321);
 		}
 
 		uint16_t getStaminaMinutes() const {
 			return staminaMinutes;
 		}
+
+		bool addOfflineTrainingTries(skills_t skill, uint64_t tries);
+
+		void addOfflineTrainingTime(int32_t addTime)
+		{
+			offlineTrainingTime = std::min<int32_t>(12 * 3600 * 1000, offlineTrainingTime + addTime);
+		}
+		void removeOfflineTrainingTime(int32_t removeTime)
+		{
+			offlineTrainingTime = std::max<int32_t>(0, offlineTrainingTime - removeTime);
+		}
+		int32_t getOfflineTrainingTime() const { return offlineTrainingTime; }
+
+		int32_t getOfflineTrainingSkill() const { return offlineTrainingSkill; }
+		void setOfflineTrainingSkill(int32_t skill) { offlineTrainingSkill = skill; }
 
 		uint64_t getBankBalance() const {
 			return bankBalance;
@@ -392,6 +420,10 @@ class Player final : public Creature, public Cylinder
 			this->town = town;
 		}
 
+		void clearModalWindows();
+		bool hasModalWindowOpen(uint32_t modalWindowId) const;
+		void onModalWindowHandled(uint32_t modalWindowId);
+
 		bool isPushable() const override;
 		uint32_t isMuted() const;
 		void addMessageBuffer();
@@ -417,14 +449,14 @@ class Player final : public Creature, public Cylinder
 			return std::max<int32_t>(0, capacity - inventoryWeight);
 		}
 
-		int32_t getMaxHealth() const override {
-			return std::max<int32_t>(1, healthMax + varStats[STAT_MAXHITPOINTS]);
+		int64_t getMaxHealth() const override {
+			return std::max<int64_t>(1, healthMax + varStats[STAT_MAXHITPOINTS]);
 		}
-		uint32_t getMana() const {
+		uint64_t getMana() const {
 			return mana;
 		}
-		uint32_t getMaxMana() const {
-			return std::max<int32_t>(0, manaMax + varStats[STAT_MAXMANAPOINTS]);
+		uint64_t getMaxMana() const {
+			return std::max<int64_t>(0, manaMax + varStats[STAT_MAXMANAPOINTS]);
 		}
 
 		Item* getInventoryItem(slots_t slot) const;
@@ -537,14 +569,14 @@ class Player final : public Creature, public Cylinder
 		bool isAttackable() const override;
 		static bool lastHitIsPlayer(Creature* lastHitCreature);
 
-		void changeHealth(int32_t healthChange, bool sendHealthChange = true) override;
-		void changeMana(int32_t manaChange);
+		void changeHealth(int64_t healthChange, bool sendHealthChange = true) override;
+		void changeMana(int64_t manaChange);
 		void changeSoul(int32_t soulChange);
 
 		bool isPzLocked() const {
 			return pzLocked;
 		}
-		BlockType_t blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
+		BlockType_t blockHit(Creature* attacker, CombatType_t combatType, int64_t& damage,
 		                             bool checkDefense = false, bool checkArmor = false, bool field = false, bool ignoreResistances = false) override;
 		void doAttacking(uint32_t interval) override;
 		bool hasExtraSwing() override {
@@ -577,8 +609,8 @@ class Player final : public Creature, public Cylinder
 		int32_t getWeaponSkill(const Item* item) const;
 		void getShieldAndWeapon(const Item*& shield, const Item*& weapon) const;
 
-		void drainHealth(Creature* attacker, int32_t damage) override;
-		void drainMana(Creature* attacker, int32_t manaLoss);
+		void drainHealth(Creature* attacker, int64_t damage) override;
+		void drainMana(Creature* attacker, int64_t manaLoss);
 		void addManaSpent(uint64_t amount);
 		void removeManaSpent(uint64_t amount, bool notify = false);
 		void addSkillAdvance(skills_t skill, uint64_t count);
@@ -589,8 +621,6 @@ class Player final : public Creature, public Cylinder
 		float getAttackFactor() const override;
 		float getDefenseFactor() const override;
 
-		void addCombatExhaust(uint32_t ticks);
-		void addHealExhaust(uint32_t ticks);
 		void addInFightTicks(bool pzlock = false);
 
 		uint64_t getGainedExperience(Creature* attacker) const override;
@@ -602,8 +632,8 @@ class Player final : public Creature, public Cylinder
 		void onCombatRemoveCondition(Condition* condition) override;
 		void onAttackedCreature(Creature* target, bool addFightTicks = true) override;
 		void onAttacked() override;
-		void onAttackedCreatureDrainHealth(Creature* target, int32_t points) override;
-		void onTargetCreatureGainHealth(Creature* target, int32_t points) override;
+		void onAttackedCreatureDrainHealth(Creature* target, int64_t points) override;
+		void onTargetCreatureGainHealth(Creature* target, int64_t points) override;
 		bool onKilledCreature(Creature* target, bool lastHit = true) override;
 		void onGainExperience(uint64_t gainExp, Creature* target) override;
 		void onGainSharedExperience(uint64_t gainExp, Creature* source);
@@ -772,6 +802,23 @@ class Player final : public Creature, public Cylinder
 				client->sendAnimatedText(message, pos, color);
 			}
 		}
+		void sendSpellCooldown(uint8_t spellId, uint32_t time) {
+ 			if (client) {
+ 				client->sendSpellCooldown(spellId, time);
+ 			}
+ 		}
+ 		void sendSpellGroupCooldown(SpellGroup_t groupId, uint32_t time) {
+ 			    if (client) {
+	   		 	 client->sendSpellGroupCooldown(groupId, time);
+			}
+ 		}
+		void sendUseItemCooldown(uint32_t time)
+		{
+			if (client) {
+				client->sendUseItemCooldown(time);
+			}
+		}
+		void sendModalWindow(const ModalWindow& modalWindow);
 
 		//container
 		void sendAddContainerItem(const Container* container, const Item* item);
@@ -866,6 +913,11 @@ class Player final : public Creature, public Cylinder
 			}
 		}
 		void sendPing();
+		void sendPingBack() const {
+			if (client) {
+				client->sendPingBack();
+			}
+		}
 		void sendStats();
 		void sendSkills() const {
 			if (client) {
@@ -1019,6 +1071,13 @@ class Player final : public Creature, public Cylinder
 		bool hasLearnedInstantSpell(const std::string& spellName) const;
 
 		void updateRegeneration();
+		
+		uint32_t getReborn() const { return reborn; };
+		void setReborn(int16_t newReborn) { reborn = newReborn; };
+		void doReborn(uint16_t value, bool removeExp = true);
+
+		int32_t idleTime = 0;
+		
 
 	private:
 		std::forward_list<Condition*> getMuteConditions() const;
@@ -1081,6 +1140,7 @@ class Player final : public Creature, public Cylinder
 		std::list<ShopInfo> shopItemList;
 
 		std::forward_list<Party*> invitePartyList;
+		std::forward_list<uint32_t> modalWindows;
 		std::forward_list<std::string> learnedInstantSpellList;
 		std::forward_list<Condition*> storedConditionList; // TODO: This variable is only temporarily used when logging in, get rid of it somehow
 
@@ -1104,6 +1164,7 @@ class Player final : public Creature, public Cylinder
 		int64_t lastFailedFollow = 0;
 		int64_t skullTicks = 0;
 		int64_t lastWalkthroughAttempt = 0;
+		int64_t lastToggleMount = 0;
 		int64_t lastPing;
 		int64_t lastPong;
 		int64_t nextAction = 0;
@@ -1130,6 +1191,7 @@ class Player final : public Creature, public Cylinder
 		uint32_t conditionImmunities = 0;
 		uint32_t conditionSuppressions = 0;
 		uint32_t level = 1;
+		uint32_t reborn = 0;
 		uint32_t magLevel = 0;
 		uint32_t actionTaskEvent = 0;
 		uint32_t nextStepEvent = 0;
@@ -1140,8 +1202,8 @@ class Player final : public Creature, public Cylinder
 		uint32_t guid = 0;
 		uint32_t windowTextId = 0;
 		uint32_t editListId = 0;
-		uint32_t mana = 0;
-		uint32_t manaMax = 0;
+		uint64_t mana = 0;
+		uint64_t manaMax = 0;
 		int32_t varSpecialSkills[SPECIALSKILL_LAST + 1] = {};
 		int32_t varSkills[SKILL_LAST + 1] = {};
 		int32_t varStats[STAT_LAST + 1] = {};
@@ -1150,8 +1212,10 @@ class Player final : public Creature, public Cylinder
 		int32_t MessageBufferCount = 0;
 		int32_t bloodHitCount = 0;
 		int32_t shieldBlockCount = 0;
-		int32_t idleTime = 0;
+		int32_t offlineTrainingSkill = -1;
+		int32_t offlineTrainingTime = 0;
 
+		uint16_t lastStatsTrainingTime = 0;
 		uint16_t staminaMinutes = 2520;
 		uint16_t maxWriteLen = 0;
 		int16_t lastDepotId = -1;
@@ -1170,6 +1234,7 @@ class Player final : public Creature, public Cylinder
 
 		bool chaseMode = false;
 		bool secureMode = false;
+		bool wasMounted = false;
 		bool ghostMode = false;
 		bool pzLocked = false;
 		bool isConnecting = false;
@@ -1184,7 +1249,8 @@ class Player final : public Creature, public Cylinder
 		}
 		void updateBaseSpeed() {
 			if (!hasFlag(PlayerFlag_SetMaxSpeed)) {
-				baseSpeed = vocation->getBaseSpeed() + (2 * (level - 1));
+				baseSpeed = baseSpeed = vocation->getBaseSpeed() + (2 * (level - 1));;
+				baseSpeed = PLAYER_MIN_SPEED;
 			} else {
 				baseSpeed = PLAYER_MAX_SPEED;
 			}

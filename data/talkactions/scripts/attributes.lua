@@ -1,48 +1,55 @@
-function onSay(player, words, param)
-	if not player:getGroup():getAccess() then
-		return true
-	end
+function onSay(cid, words, param)
 
-	local position = player:getPosition()
-	position:getNextPosition(player:getDirection())
+  local player = Player(cid)
+  if not player:getGroup():getAccess() then
+  return true
+  end
 
-	local tile = Tile(position)
-	if not tile then
-		player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "There is no tile in front of you.")
-		return false
-	end
+  if player:getAccountType() < ACCOUNT_TYPE_GOD then
+  return false
+  end
 
-	local thing = tile:getTopVisibleThing(player)
-	if not thing then
-		player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "There is an empty tile in front of you.")
-		return false
-	end
+  local t = param:split(" ", 1)
+  local attr = t[1]
+  local value = (t[2])
 
-	local separatorPos = param:find(',')
-	if not separatorPos then
-		player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, string.format("Usage: %s attribute, value.", words))
-		return false
-	end
+  local position = player:getPosition()
+  position:getNextPosition(player:getDirection())
 
-	local attribute = string.trim(param:sub(0, separatorPos - 1))
-	local value = string.trim(param:sub(separatorPos + 1))
+  local tile = position:getTile()
+  if not tile then
+  player:sendCancelMessage("Object not found.")
+  return false
+  end
 
-	if thing:isItem() then
-		local attributeId = Game.getItemAttributeByName(attribute)
-		if attributeId == ITEM_ATTRIBUTE_NONE then
-			player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Invalid attribute name.")
-			return false
-		end
+  local thing = tile:getTopVisibleThing(player)
+  if not thing then
+  player:sendCancelMessage("Thing not found.")
+  return false
+  end
 
-		if not thing:setAttribute(attribute, value) then
-			player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Could not set attribute.")
-			return false
-		end
 
-		player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, string.format("Attribute %s set to: %s", attribute, thing:getAttribute(attributeId)))
-		position:sendMagicEffect(CONST_ME_MAGIC_GREEN)
-	else
-		player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "Thing in front of you is not supported.")
-		return false
-	end
+  if thing:isItem() then
+  if attr == "aid" then
+  thing:setAttribute(1, tonumber(value))
+  elseif attr == "uid" then
+  thing:setAttribute(2, tonumber(value))
+  elseif attr == "descr" or attr == "description" then
+  thing:setAttribute(4, value)
+  elseif attr == "text"  then
+  thing:setAttribute(8, value)
+  elseif attr == "attack" then
+  thing:setAttribute(1024, tonumber(value))
+  elseif attr == "defense" then
+  thing:setAttribute(2048, tonumber(value))
+  elseif attr == "extradefense" then
+  thing:setAttribute(4096, tonumber(value))
+  else
+  player:sendCancelMessage("Bad Attribute.")
+  return true
+  end
+  end
+
+  position:sendMagicEffect(CONST_ME_MAGIC_RED)
+  return false
 end

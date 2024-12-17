@@ -7,4 +7,7 @@
 	<event type="death" name="PlayerDeath" script="playerdeath.lua" />
 	<event type="death" name="DropLoot" script="droploot.lua" />
 	<event type="extendedopcode" name="ExtendedOpcode" script="extendedopcode.lua" />
+	
+	<event type="think" name="SummonTp" script="summon_think.lua" />
+	<event type="advance" name="SpellNotifier" script="spellnotifier.lua"/>
 </creaturescripts>

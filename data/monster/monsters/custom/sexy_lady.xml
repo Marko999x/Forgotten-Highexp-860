@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Sexy Lady" nameDescription="a sexy lady" race="blood" experience="0" speed="760">
+	<health now="5500000" max="5500000" />
+	<look type="149" head="94" body="77" legs="96" feet="0" addons="3" corpse="6081" />
+	<targetchange interval="5000" chance="25" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="95" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-20000" max="-30000" />
+		<attack name="death" interval="2000" chance="9" range="7" target="1" min="-10000" max="-20000">
+			<attribute key="shootEffect" value="death" />
+			<attribute key="areaEffect" value="mortarea" />
+		</attack>
+		<attack name="speed" interval="2000" chance="5" range="7" speedchange="-440" duration="5000">
+			<attribute key="shootEffect" value="death" />
+			<attribute key="areaEffect" value="mortarea" />
+		</attack>	
+		<attack name="lifedrain" interval="2000" chance="8" target="0" radius="3" min="-10000" max="-20000">
+			<attribute key="areaEffect" value="blackspark" />
+		</attack>		
+		<attack name="fire" interval="2000" chance="7" length="5" spread="3" min="-10000" max="-20000">
+			<attribute key="areaEffect" value="explosionarea" />
+		</attack>	
+		<attack name="death" interval="2000" chance="6" length="8" spread="0" min="-10000" max="-20000">
+			<attribute key="areaEffect" value="redspark" />
+		</attack>			
+		<attack name="death" interval="2000" chance="10" range="7" radius="4" target="0" min="-10000" max="-20000">
+			<attribute key="areaEffect" value="redspark" />
+		</attack>
+	</attacks>
+	<defenses armor="20" defense="20">
+		<defense name="speed" interval="2000" chance="20" speedchange="360" duration="2000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element firePercent="30" />
+		<element icePercent="30" />
+		<element holyPercent="30" />
+		<element deathPercent="-10" />
+		<element energyPercent="-10" />
+		<element earthPercent="-10" />
+		<element physicalPercent="-10" />
+	</elements>
+	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="3000" chance="30">
+		<voice sentence="Ahhhhrrrr!" />
+		<voice sentence="Waaaaah!" />
+		<voice sentence="Carnage!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

@@ -1,113 +1,160 @@
 <?xml version="1.0"?>
 <houses>
-	<house name="Rhyves Flats 14" houseid="1" entryx="167" entryy="360" entryz="6" rent="0" townid="2" size="14" />
-	<house name="Rhyves Flats 15" houseid="2" entryx="164" entryy="361" entryz="6" rent="0" townid="2" size="16" />
-	<house name="Rhyves Flats 16" houseid="3" entryx="163" entryy="360" entryz="6" rent="0" townid="2" size="10" />
-	<house name="Baraganor Boulevard 1" houseid="4" entryx="250" entryy="481" entryz="12" rent="0" townid="3" size="27" />
-	<house name="Saund Top 1" houseid="5" entryx="229" entryy="560" entryz="5" rent="0" townid="5" size="13" />
-	<house name="Kazgal Close 1" houseid="6" entryx="233" entryy="481" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Tower Flat" houseid="7" entryx="131" entryy="352" entryz="4" rent="0" townid="2" size="10" />
-	<house name="Castle Street 1" houseid="8" entryx="117" entryy="349" entryz="7" rent="0" townid="2" size="26" />
-	<house name="Seaview 2" houseid="9" entryx="114" entryy="356" entryz="6" rent="0" townid="2" size="36" />
-	<house name="Seaview 1" houseid="10" entryx="117" entryy="353" entryz="5" rent="0" townid="2" size="26" />
-	<house name="Hill Hut 1" houseid="11" entryx="129" entryy="363" entryz="6" rent="0" townid="2" size="23" />
-	<house name="Hill Hut 2" houseid="12" entryx="134" entryy="359" entryz="5" rent="0" townid="2" size="23" />
-	<house name="Farm Lane 1" houseid="13" entryx="117" entryy="379" entryz="7" rent="0" townid="2" size="16" />
-	<house name="Farm Lane 2" houseid="14" entryx="116" entryy="391" entryz="7" rent="0" townid="2" size="30" />
-	<house name="Church Avenue 1" houseid="15" entryx="147" entryy="375" entryz="7" rent="0" townid="2" size="18" />
-	<house name="Church Avenue 2" houseid="16" entryx="147" entryy="382" entryz="7" rent="0" townid="2" size="18" />
-	<house name="Church Avenue 3" houseid="17" entryx="151" entryy="400" entryz="7" rent="0" townid="2" size="34" />
-	<house name="Church Avenue 4" houseid="18" entryx="151" entryy="404" entryz="7" rent="0" townid="2" size="23" />
-	<house name="Church Avenue 5" houseid="19" entryx="159" entryy="400" entryz="7" rent="0" townid="2" size="16" />
-	<house name="Church Avenue 7" houseid="20" entryx="162" entryy="404" entryz="7" rent="0" townid="2" size="20" />
-	<house name="City Walls 1" houseid="23" entryx="115" entryy="414" entryz="7" rent="0" townid="2" size="26" />
-	<house name="City Walls 2" houseid="24" entryx="115" entryy="414" entryz="6" rent="0" townid="2" size="26" />
-	<house name="City Walls 3" houseid="25" entryx="193" entryy="362" entryz="7" rent="0" townid="2" size="36" />
-	<house name="City Walls 4" houseid="26" entryx="193" entryy="362" entryz="6" rent="0" townid="2" size="36" />
-	<house name="Hilltop 1" houseid="27" entryx="166" entryy="409" entryz="6" rent="0" townid="2" size="28" />
-	<house name="Hilltop 2" houseid="28" entryx="177" entryy="400" entryz="6" rent="0" townid="2" size="33" />
-	<house name="Hilltop 3" houseid="29" entryx="178" entryy="412" entryz="6" rent="0" townid="2" size="42" />
-	<house name="Hilltop Hall" houseid="30" entryx="193" entryy="405" entryz="5" rent="0" townid="2" size="159" />
-	<house name="Rhyves Flats 1" houseid="31" entryx="166" entryy="364" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 2" houseid="32" entryx="166" entryy="360" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 3" houseid="33" entryx="166" entryy="357" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 4" houseid="34" entryx="171" entryy="363" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 5" houseid="35" entryx="175" entryy="364" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 6" houseid="36" entryx="175" entryy="360" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 7" houseid="37" entryx="175" entryy="356" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 8" houseid="38" entryx="174" entryy="357" entryz="7" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 9" houseid="39" entryx="175" entryy="357" entryz="6" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 10" houseid="40" entryx="175" entryy="360" entryz="6" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 11" houseid="41" entryx="175" entryy="364" entryz="6" rent="0" townid="2" size="10" />
-	<house name="Rhyves Flats 13" houseid="42" entryx="170" entryy="361" entryz="6" rent="0" townid="2" size="13" />
-	<house name="Rhyves Flats 12" houseid="43" entryx="171" entryy="360" entryz="6" rent="0" townid="2" size="10" />
-	<house name="Baraganor Boulevard 2" houseid="44" entryx="260" entryy="471" entryz="12" rent="0" townid="3" size="31" />
-	<house name="Baraganor Boulevard 3" houseid="45" entryx="266" entryy="471" entryz="12" rent="0" townid="3" size="31" />
-	<house name="Baraganor Boulevard 4" houseid="46" entryx="268" entryy="469" entryz="12" rent="0" townid="3" size="27" />
-	<house name="Baraganor Boulevard 5" houseid="47" entryx="268" entryy="463" entryz="12" rent="0" townid="3" size="27" />
-	<house name="Baraganor Boulevard 6" houseid="48" entryx="268" entryy="457" entryz="12" rent="0" townid="3" size="27" />
-	<house name="Baraganor Boulevard 7" houseid="49" entryx="266" entryy="454" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Baraganor Boulevard 8" houseid="50" entryx="260" entryy="454" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Kazgal Close 2" houseid="51" entryx="224" entryy="471" entryz="12" rent="0" townid="3" size="31" />
-	<house name="Kazgal Close 3" houseid="52" entryx="218" entryy="471" entryz="12" rent="0" townid="3" size="31" />
-	<house name="Kazgal Close 4" houseid="53" entryx="215" entryy="469" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Kazgal Close 5" houseid="54" entryx="215" entryy="463" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Kazgal Close6" houseid="55" entryx="215" entryy="457" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Kazgal Close 7" houseid="56" entryx="218" entryy="454" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Kazgal Close 8" houseid="57" entryx="224" entryy="454" entryz="12" rent="0" townid="3" size="32" />
-	<house name="Hammersmith Hall" houseid="58" entryx="230" entryy="439" entryz="12" rent="0" townid="3" size="166" />
-	<house name="Varnack's Cavern" houseid="59" entryx="253" entryy="444" entryz="12" rent="0" townid="3" size="187" />
-	<house name="Saund Street 1" houseid="60" entryx="231" entryy="550" entryz="6" rent="0" townid="5" size="10" />
-	<house name="Saund Street 2" houseid="61" entryx="226" entryy="550" entryz="6" rent="0" townid="5" size="14" />
-	<house name="Saund Street 3" houseid="62" entryx="241" entryy="554" entryz="6" rent="0" townid="5" size="10" />
-	<house name="Saund Street 4" houseid="63" entryx="238" entryy="558" entryz="6" rent="0" townid="5" size="14" />
-	<house name="Saund Street 5" houseid="64" entryx="241" entryy="558" entryz="6" rent="0" townid="5" size="10" />
-	<house name="Saund Top 2" houseid="65" entryx="231" entryy="558" entryz="5" rent="0" townid="5" size="14" />
-	<house name="Saund Top 3" houseid="66" entryx="229" entryy="557" entryz="5" rent="0" townid="5" size="11" />
-	<house name="Dock Street 1" houseid="67" entryx="430" entryy="238" entryz="6" rent="0" townid="4" size="18" />
-	<house name="Dock Street 2" houseid="68" entryx="414" entryy="237" entryz="7" rent="0" townid="4" size="19" />
-	<house name="Dock Street 3" houseid="69" entryx="415" entryy="212" entryz="7" rent="0" townid="4" size="42" />
-	<house name="Nomad Hill 1" houseid="70" entryx="406" entryy="222" entryz="6" rent="0" townid="4" size="14" />
-	<house name="Nomad Hill 2" houseid="71" entryx="400" entryy="229" entryz="6" rent="0" townid="4" size="16" />
-	<house name="Nomad Hill 3" houseid="72" entryx="397" entryy="222" entryz="5" rent="0" townid="4" size="22" />
-	<house name="Great Hall 1" houseid="73" entryx="436" entryy="208" entryz="6" rent="0" townid="4" size="22" />
-	<house name="Great Hall 2" houseid="74" entryx="437" entryy="207" entryz="6" rent="0" townid="4" size="24" />
-	<house name="Tarat Road 1" houseid="75" entryx="434" entryy="195" entryz="7" rent="0" townid="4" size="23" />
-	<house name="Temple Terrace 1" houseid="76" entryx="478" entryy="190" entryz="7" rent="0" townid="4" size="33" />
-	<house name="Temple Terrace 2" houseid="77" entryx="482" entryy="183" entryz="7" rent="0" townid="4" size="29" />
-	<house name="Temple Terrace 3" houseid="78" entryx="492" entryy="176" entryz="6" rent="0" townid="4" size="30" />
-	<house name="Tarat Road 2" houseid="79" entryx="440" entryy="193" entryz="7" rent="0" townid="4" size="23" />
-	<house name="Tarat Road 3" houseid="80" entryx="446" entryy="196" entryz="7" rent="0" townid="4" size="31" />
-	<house name="Tarat Road 4" houseid="81" entryx="451" entryy="192" entryz="7" rent="0" townid="4" size="19" />
-	<house name="Tarat Road 6" houseid="82" entryx="452" entryy="200" entryz="7" rent="0" townid="4" size="44" />
-	<house name="Tarat Road 7" houseid="83" entryx="455" entryy="192" entryz="7" rent="0" townid="4" size="13" />
-	<house name="Tarat Road 8" houseid="84" entryx="461" entryy="200" entryz="7" rent="0" townid="4" size="26" />
-	<house name="Tarat Road 9" houseid="85" entryx="446" entryy="192" entryz="6" rent="0" townid="4" size="20" />
-	<house name="Smith Lane 1" houseid="86" entryx="475" entryy="183" entryz="7" rent="0" townid="4" size="23" />
-	<house name="Smith Lane 2" houseid="87" entryx="475" entryy="175" entryz="7" rent="0" townid="4" size="28" />
-	<house name="Smith Lane 3" houseid="88" entryx="473" entryy="168" entryz="7" rent="0" townid="4" size="32" />
-	<house name="Smith Lane 4" houseid="89" entryx="475" entryy="163" entryz="7" rent="0" townid="4" size="26" />
-	<house name="Smith Lane 5" houseid="90" entryx="475" entryy="158" entryz="7" rent="0" townid="4" size="18" />
-	<house name="Smith Lane 6" houseid="91" entryx="473" entryy="164" entryz="6" rent="0" townid="4" size="24" />
-	<house name="Smith Lane 7" houseid="92" entryx="473" entryy="161" entryz="6" rent="0" townid="4" size="26" />
-	<house name="Smith Lane Shop" houseid="93" entryx="479" entryy="160" entryz="7" rent="0" townid="4" size="28" />
-	<house name="Snowcapped Street 1" houseid="94" entryx="426" entryy="195" entryz="6" rent="0" townid="4" size="23" />
-	<house name="Snowcapped Street 2" houseid="95" entryx="425" entryy="192" entryz="6" rent="0" townid="4" size="18" />
-	<house name="Snowcapped Street 3" houseid="96" entryx="421" entryy="192" entryz="6" rent="0" townid="4" size="18" />
-	<house name="Wall Flat 1" houseid="97" entryx="439" entryy="183" entryz="7" rent="0" townid="4" size="13" />
-	<house name="Wall Flat 2" houseid="98" entryx="439" entryy="181" entryz="6" rent="0" townid="4" size="13" />
-	<house name="Wall Flat 3" houseid="99" entryx="463" entryy="185" entryz="5" rent="0" townid="4" size="27" />
-	<house name="Wall Flat 4" houseid="100" entryx="461" entryy="155" entryz="6" rent="0" townid="4" size="10" />
-	<house name="Farm Lane 3" houseid="101" entryx="116" entryy="395" entryz="7" rent="0" townid="2" size="24" />
-	<house name="Farm Lane 4" houseid="102" entryx="116" entryy="399" entryz="7" rent="0" townid="2" size="30" />
-	<house name="The Square 1" houseid="103" entryx="127" entryy="406" entryz="7" rent="0" townid="2" size="22" />
-	<house name="The Square 2 (Shop)" houseid="104" entryx="121" entryy="398" entryz="7" rent="0" townid="2" size="26" />
-	<house name="Central Hall" houseid="105" entryx="125" entryy="381" entryz="7" rent="0" townid="2" size="163" />
-	<house name="The Square 3" houseid="106" entryx="136" entryy="380" entryz="7" rent="0" townid="2" size="18" />
-	<house name="The Square 4 (Shop)" houseid="107" entryx="143" entryy="391" entryz="7" rent="0" townid="2" size="33" />
-	<house name="Church Avenue 6" houseid="108" entryx="158" entryy="403" entryz="7" rent="0" townid="2" size="20" />
-	<house name="Castle Street 2" houseid="109" entryx="112" entryy="345" entryz="7" rent="0" townid="2" size="23" />
-	<house name="Castle Street 3" houseid="110" entryx="116" entryy="341" entryz="7" rent="0" townid="2" size="24" />
-	<house name="Armory Flat 1" houseid="111" entryx="186" entryy="377" entryz="6" rent="0" townid="2" size="20" />
-	<house name="Armory Flat 2" houseid="112" entryx="185" entryy="376" entryz="6" rent="0" townid="2" size="20" />
+	<house name="Forgotten House #1" houseid="1" entryx="991" entryy="1014" entryz="7" rent="0" townid="1" size="121" />
+	<house name="Forgotten House #2" houseid="2" entryx="996" entryy="1005" entryz="5" rent="0" townid="1" size="1" />
+	<house name="Forgotten House #3" houseid="3" entryx="1008" entryy="1015" entryz="7" rent="0" townid="1" size="53" />
+	<house name="Forgotten House #4" houseid="4" entryx="1013" entryy="1021" entryz="6" rent="0" townid="1" size="47" />
+	<house name="Forgotten House #5" houseid="5" entryx="983" entryy="1009" entryz="7" rent="0" townid="1" size="40" />
+	<house name="Forgotten House #6" houseid="6" entryx="978" entryy="1012" entryz="7" rent="0" townid="1" size="24" />
+	<house name="Forgotten House #7" houseid="7" entryx="982" entryy="995" entryz="7" rent="0" townid="1" size="35" />
+	<house name="Forgotten House #8" houseid="8" entryx="980" entryy="997" entryz="6" rent="0" townid="1" size="12" />
+	<house name="Forgotten House #9" houseid="9" entryx="1018" entryy="1011" entryz="7" rent="0" townid="1" size="31" />
+	<house name="Forgotten House #10" houseid="10" entryx="1025" entryy="1011" entryz="7" rent="0" townid="1" size="31" />
+	<house name="Forgotten House #11" houseid="11" entryx="1031" entryy="1011" entryz="7" rent="0" townid="1" size="69" />
+	<house name="Forgotten House #12" houseid="12" entryx="1022" entryy="1020" entryz="7" rent="0" townid="1" size="27" />
+	<house name="Forgotten House #13" houseid="13" entryx="1022" entryy="1020" entryz="6" rent="0" townid="1" size="27" />
+	<house name="Forgotten House #14" houseid="14" entryx="1019" entryy="998" entryz="7" rent="0" townid="1" size="50" />
+	<house name="Forgotten House #15" houseid="15" entryx="1024" entryy="996" entryz="6" rent="0" townid="1" size="92" />
+	<house name="Forgotten House #16" houseid="16" entryx="1035" entryy="998" entryz="7" rent="0" townid="1" size="50" />
+	<house name="Forgotten House #17" houseid="17" entryx="1040" entryy="996" entryz="6" rent="0" townid="1" size="92" />
+	<house name="Forgotten House #18" houseid="18" entryx="987" entryy="986" entryz="7" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #19" houseid="19" entryx="993" entryy="986" entryz="7" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #20" houseid="20" entryx="987" entryy="986" entryz="6" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #21" houseid="21" entryx="993" entryy="986" entryz="6" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #22" houseid="22" entryx="1006" entryy="986" entryz="7" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #23" houseid="23" entryx="1012" entryy="986" entryz="7" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #24" houseid="24" entryx="1006" entryy="986" entryz="6" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #25" houseid="25" entryx="1012" entryy="986" entryz="6" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #26" houseid="26" entryx="997" entryy="969" entryz="7" rent="0" townid="1" size="282" />
+	<house name="Forgotten House #27" houseid="27" entryx="1003" entryy="969" entryz="7" rent="0" townid="1" size="282" />
+	<house name="Forgotten House #28" houseid="28" entryx="963" entryy="1000" entryz="7" rent="0" townid="1" size="63" />
+	<house name="Forgotten House #29" houseid="29" entryx="963" entryy="998" entryz="6" rent="0" townid="1" size="49" />
+	<house name="Forgotten House #30" houseid="30" entryx="963" entryy="996" entryz="5" rent="0" townid="1" size="35" />
+	<house name="Forgotten House #31" houseid="31" entryx="953" entryy="1000" entryz="7" rent="0" townid="1" size="63" />
+	<house name="Forgotten House #32" houseid="32" entryx="953" entryy="998" entryz="6" rent="0" townid="1" size="49" />
+	<house name="Forgotten House #33" houseid="33" entryx="953" entryy="996" entryz="5" rent="0" townid="1" size="35" />
+	<house name="Forgotten House #34" houseid="34" entryx="936" entryy="994" entryz="7" rent="0" townid="1" size="36" />
+	<house name="Forgotten House #35" houseid="35" entryx="940" entryy="994" entryz="7" rent="0" townid="1" size="36" />
+	<house name="Forgotten House #36" houseid="36" entryx="936" entryy="995" entryz="6" rent="0" townid="1" size="36" />
+	<house name="Forgotten House #37" houseid="37" entryx="940" entryy="995" entryz="6" rent="0" townid="1" size="36" />
+	<house name="Forgotten House #38" houseid="38" entryx="935" entryy="995" entryz="5" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #39" houseid="39" entryx="942" entryy="995" entryz="5" rent="0" townid="1" size="12" />
+	<house name="Forgotten House #40" houseid="40" entryx="1032" entryy="978" entryz="7" rent="0" townid="1" size="88" />
+	<house name="Forgotten House #41" houseid="41" entryx="1035" entryy="978" entryz="6" rent="0" townid="1" size="55" />
+	<house name="Forgotten House #42" houseid="42" entryx="1032" entryy="962" entryz="7" rent="0" townid="1" size="88" />
+	<house name="Forgotten House #43" houseid="43" entryx="1035" entryy="962" entryz="6" rent="0" townid="1" size="55" />
+	<house name="Forgotten House #44" houseid="44" entryx="1032" entryy="946" entryz="7" rent="0" townid="1" size="88" />
+	<house name="Forgotten House #45" houseid="45" entryx="1035" entryy="946" entryz="6" rent="0" townid="1" size="55" />
+	<house name="Forgotten House #46" houseid="46" entryx="995" entryy="1037" entryz="7" rent="0" townid="1" size="23" />
+	<house name="Forgotten House #47" houseid="47" entryx="992" entryy="1040" entryz="6" rent="0" townid="1" size="46" />
+	<house name="Forgotten House #48" houseid="48" entryx="1007" entryy="1034" entryz="7" rent="0" townid="1" size="65" />
+	<house name="Forgotten House #49" houseid="49" entryx="981" entryy="1037" entryz="7" rent="0" townid="1" size="85" />
+	<house name="Forgotten House #50" houseid="50" entryx="1058" entryy="1027" entryz="6" rent="0" townid="1" size="143" />
+	<house name="Forgotten House #51" houseid="51" entryx="1058" entryy="1031" entryz="6" rent="0" townid="1" size="143" />
+	<house name="Forgotten House #52" houseid="52" entryx="1075" entryy="1027" entryz="6" rent="0" townid="1" size="143" />
+	<house name="Forgotten House #53" houseid="53" entryx="1075" entryy="1031" entryz="6" rent="0" townid="1" size="143" />
+	<house name="Forgotten House #54" houseid="54" entryx="998" entryy="1050" entryz="7" rent="0" townid="1" size="9" />
+	<house name="Forgotten House #55" houseid="55" entryx="990" entryy="1050" entryz="7" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #56" houseid="56" entryx="984" entryy="1050" entryz="7" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #57" houseid="57" entryx="983" entryy="1051" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #58" houseid="58" entryx="987" entryy="1051" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #59" houseid="59" entryx="991" entryy="1051" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #60" houseid="60" entryx="995" entryy="1056" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #61" houseid="61" entryx="997" entryy="1062" entryz="7" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #62" houseid="62" entryx="991" entryy="1072" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #63" houseid="63" entryx="987" entryy="1072" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #64" houseid="64" entryx="983" entryy="1072" entryz="7" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #65" houseid="65" entryx="983" entryy="1073" entryz="7" rent="0" townid="1" size="12" />
+	<house name="Forgotten House #66" houseid="66" entryx="990" entryy="1073" entryz="7" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #67" houseid="67" entryx="996" entryy="1073" entryz="7" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #68" houseid="68" entryx="998" entryy="1050" entryz="6" rent="0" townid="1" size="9" />
+	<house name="Forgotten House #69" houseid="69" entryx="990" entryy="1050" entryz="6" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #70" houseid="70" entryx="984" entryy="1050" entryz="6" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #71" houseid="71" entryx="983" entryy="1051" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #72" houseid="72" entryx="987" entryy="1051" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #73" houseid="73" entryx="991" entryy="1051" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #74" houseid="74" entryx="995" entryy="1056" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #75" houseid="75" entryx="997" entryy="1062" entryz="6" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #76" houseid="76" entryx="991" entryy="1072" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #77" houseid="77" entryx="987" entryy="1072" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #78" houseid="78" entryx="983" entryy="1072" entryz="6" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #79" houseid="79" entryx="983" entryy="1073" entryz="6" rent="0" townid="1" size="12" />
+	<house name="Forgotten House #80" houseid="80" entryx="990" entryy="1073" entryz="6" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #81" houseid="81" entryx="996" entryy="1073" entryz="6" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #82" houseid="82" entryx="998" entryy="1050" entryz="5" rent="0" townid="1" size="9" />
+	<house name="Forgotten House #83" houseid="83" entryx="990" entryy="1050" entryz="5" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #84" houseid="84" entryx="984" entryy="1050" entryz="5" rent="0" townid="1" size="15" />
+	<house name="Forgotten House #85" houseid="85" entryx="983" entryy="1051" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #86" houseid="86" entryx="987" entryy="1051" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #87" houseid="87" entryx="991" entryy="1051" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #88" houseid="88" entryx="995" entryy="1056" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #89" houseid="89" entryx="997" entryy="1062" entryz="5" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #90" houseid="90" entryx="991" entryy="1072" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #91" houseid="91" entryx="987" entryy="1072" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #92" houseid="92" entryx="983" entryy="1072" entryz="5" rent="0" townid="1" size="21" />
+	<house name="Forgotten House #93" houseid="93" entryx="983" entryy="1073" entryz="5" rent="0" townid="1" size="12" />
+	<house name="Forgotten House #94" houseid="94" entryx="990" entryy="1073" entryz="5" rent="0" townid="1" size="18" />
+	<house name="Forgotten House #95" houseid="95" entryx="996" entryy="1073" entryz="5" rent="0" townid="1" size="18" />
+	<house name="Dedicated Castle #1" houseid="96" entryx="1484" entryy="1183" entryz="7" rent="0" townid="3" size="1502" />
+	<house name="Dedicated Castle #2" houseid="97" entryx="1521" entryy="1183" entryz="7" rent="0" townid="3" size="1502" />
+	<house name="Dedicated Castle #3" houseid="98" entryx="1558" entryy="1183" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #4" houseid="99" entryx="1595" entryy="1183" entryz="7" rent="0" townid="3" size="1502" />
+	<house name="Dedicated Castle #5" houseid="100" entryx="1632" entryy="1183" entryz="7" rent="0" townid="3" size="1502" />
+	<house name="Dedicated Castle #6" houseid="101" entryx="1484" entryy="1143" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #7" houseid="102" entryx="1521" entryy="1143" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #8" houseid="103" entryx="1558" entryy="1143" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #9" houseid="104" entryx="1595" entryy="1143" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #10" houseid="105" entryx="1632" entryy="1143" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #11" houseid="106" entryx="1484" entryy="1103" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #12" houseid="107" entryx="1521" entryy="1103" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #13" houseid="108" entryx="1558" entryy="1103" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #14" houseid="109" entryx="1595" entryy="1103" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #15" houseid="110" entryx="1632" entryy="1103" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #16" houseid="111" entryx="1484" entryy="1063" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #17" houseid="112" entryx="1521" entryy="1063" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #18" houseid="113" entryx="1558" entryy="1063" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #19" houseid="114" entryx="1595" entryy="1063" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #20" houseid="115" entryx="1632" entryy="1063" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #21" houseid="116" entryx="1484" entryy="1023" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #22" houseid="117" entryx="1521" entryy="1023" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #23" houseid="118" entryx="1558" entryy="1023" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #24" houseid="119" entryx="1595" entryy="1023" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #25" houseid="120" entryx="1632" entryy="1023" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #26" houseid="121" entryx="1484" entryy="983" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #27" houseid="122" entryx="1521" entryy="983" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #28" houseid="123" entryx="1558" entryy="983" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #29" houseid="124" entryx="1595" entryy="983" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #30" houseid="125" entryx="1632" entryy="983" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #31" houseid="126" entryx="1484" entryy="943" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #32" houseid="127" entryx="1521" entryy="943" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #33" houseid="128" entryx="1558" entryy="943" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #34" houseid="129" entryx="1595" entryy="943" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Dedicated Castle #35" houseid="130" entryx="1632" entryy="943" entryz="7" rent="0" townid="3" size="1446" />
+	<house name="Castle #1" houseid="131" entryx="1340" entryy="964" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #2" houseid="132" entryx="1343" entryy="964" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #3" houseid="133" entryx="1340" entryy="968" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #4" houseid="134" entryx="1343" entryy="968" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #5" houseid="135" entryx="1340" entryy="971" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #6" houseid="136" entryx="1343" entryy="971" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #7" houseid="137" entryx="1340" entryy="973" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #8" houseid="138" entryx="1343" entryy="973" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #9" houseid="139" entryx="1340" entryy="975" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #10" houseid="140" entryx="1343" entryy="975" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #11" houseid="141" entryx="1340" entryy="977" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #12" houseid="142" entryx="1343" entryy="977" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #13" houseid="143" entryx="1340" entryy="979" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #14" houseid="144" entryx="1343" entryy="979" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #15" houseid="145" entryx="1340" entryy="981" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #16" houseid="146" entryx="1343" entryy="981" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #17" houseid="147" entryx="1340" entryy="983" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #18" houseid="148" entryx="1343" entryy="983" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #19" houseid="149" entryx="1340" entryy="985" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Castle #20" houseid="150" entryx="1343" entryy="985" entryz="7" rent="0" townid="2" size="263" />
+	<house name="Unnamed House #151" houseid="151" entryx="1007" entryy="993" entryz="7" rent="0" townid="1" size="0" />
+	<house name="VIP House #1" houseid="152" entryx="853" entryy="1213" entryz="7" rent="0" townid="4" size="46" />
+	<house name="VIP House #2" houseid="153" entryx="864" entryy="1213" entryz="7" rent="0" townid="4" size="46" />
+	<house name="VIP House #3" houseid="154" entryx="853" entryy="1217" entryz="7" rent="0" townid="4" size="46" />
+	<house name="VIP House #4" houseid="155" entryx="864" entryy="1217" entryz="7" rent="0" townid="4" size="46" />
+	<house name="VIP House #5" houseid="156" entryx="853" entryy="1228" entryz="7" rent="0" townid="4" size="46" />
+	<house name="VIP House #6" houseid="157" entryx="864" entryy="1228" entryz="7" rent="0" townid="4" size="46" />
 </houses>

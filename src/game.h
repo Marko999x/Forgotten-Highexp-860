@@ -89,7 +89,7 @@ static constexpr int32_t RANGE_REQUEST_TRADE_INTERVAL = 400;
 class Game
 {
 	public:
-		Game() = default;
+		Game();
 		~Game();
 
 		// non-copyable
@@ -335,6 +335,7 @@ class Game
 		void kickPlayer(uint32_t playerId, bool displayEffect);
 		void playerReportBug(uint32_t playerId, const std::string& message);
 		void playerDebugAssert(uint32_t playerId, const std::string& assertLine, const std::string& date, const std::string& description, const std::string& comment);
+		void playerAnswerModalWindow(uint32_t playerId, uint32_t modalWindowId, uint8_t button, uint8_t choice);
 		void playerReportRuleViolation(uint32_t playerId, const std::string& targetName, uint8_t reportType, uint8_t reportReason, const std::string& comment, const std::string& translation);
 
 		bool internalStartTrade(Player* player, Player* tradePartner, Item* tradeItem);
@@ -360,6 +361,7 @@ class Game
 		void playerOpenPrivateChannel(uint32_t playerId, std::string& receiver);
 		void playerCloseNpcChannel(uint32_t playerId);
 		void playerReceivePing(uint32_t playerId);
+		void playerReceivePingBack(uint32_t playerId);
 		void playerAutoWalk(uint32_t playerId, const std::vector<Direction>& listDir);
 		void playerStopAutoWalk(uint32_t playerId);
 		void playerUseItemEx(uint32_t playerId, const Position& fromPos, uint8_t fromStackPos,
@@ -398,6 +400,7 @@ class Game
 		void playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type, const std::string& receiver, const std::string& text);
 		void playerChangeOutfit(uint32_t playerId, Outfit_t outfit);
 		void playerInviteToParty(uint32_t playerId, uint32_t invitedId);
+		void playerToggleMount(uint32_t playerId, bool mount);
 		void playerJoinParty(uint32_t playerId, uint32_t leaderId);
 		void playerRevokePartyInvitation(uint32_t playerId, uint32_t invitedId);
 		void playerPassPartyLeadership(uint32_t playerId, uint32_t newLeaderId);
@@ -458,6 +461,8 @@ class Game
 
 		void startDecay(Item* item);
 
+		void sendOfflineTrainingDialog(Player* player);
+
 		int16_t getWorldTime() { return worldTime; }
 		void updateWorldTime();
 
@@ -497,6 +502,7 @@ class Game
 
 		Groups groups;
 		Map map;
+		Mounts mounts;
 		Raids raids;
 		Quests quests;
 
@@ -568,6 +574,8 @@ class Game
 		uint8_t lightLevel = LIGHT_DAY;
 		uint8_t lightColor = 215;
 		int16_t worldTime = 0;
+
+		ModalWindow offlineTrainingWindow{std::numeric_limits<uint32_t>::max(), "Choose a Skill", "Please choose a skill:"};
 
 		GameState_t gameState = GAME_STATE_NORMAL;
 		WorldType_t worldType = WORLD_TYPE_PVP;

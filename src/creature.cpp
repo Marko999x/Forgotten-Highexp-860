@@ -442,11 +442,7 @@ void Creature::onCreatureAppear(Creature* creature, bool isLogin)
 void Creature::onRemoveCreature(Creature* creature, bool)
 {
 	onCreatureDisappear(creature, true);
-	if (creature == this) {
-		if (master && !master->isRemoved()) {
-			setMaster(nullptr);
-		}
-	} else if (isMapLoaded) {
+	if (creature != this && isMapLoaded) {
 		if (creature->getPosition().z == getPosition().z) {
 			updateTileCache(creature->getTile(), creature->getPosition());
 		}
@@ -618,9 +614,10 @@ void Creature::onCreatureMove(Creature* creature, const Tile* newTile, const Pos
 	}
 
 	if (creature == followCreature || (creature == this && followCreature)) {
-		if (hasFollowPath) {
-			isUpdatingPath = true;
-		}
+	    if (hasFollowPath) {
+            isUpdatingPath = false;
+            g_dispatcher.addTask(createTask(std::bind(&Game::updateCreatureWalk, &g_game, getID())));
+        }
 
 		if (newPos.z != oldPos.z || !canSee(followCreature->getPosition())) {
 			onCreatureDisappear(followCreature, false);
@@ -798,14 +795,14 @@ Item* Creature::getCorpse(Creature*, Creature*)
 	return Item::CreateItem(getLookCorpse());
 }
 
-void Creature::changeHealth(int32_t healthChange, bool sendHealthChange/* = true*/)
+void Creature::changeHealth(int64_t healthChange, bool sendHealthChange/* = true*/)
 {
-	int32_t oldHealth = health;
+	int64_t oldHealth = health;
 
 	if (healthChange > 0) {
-		health += std::min<int32_t>(healthChange, getMaxHealth() - health);
+		health += std::min<int64_t>(healthChange, getMaxHealth() - health);
 	} else {
-		health = std::max<int32_t>(0, health + healthChange);
+		health = std::max<int64_t>(0, health + healthChange);
 	}
 
 	if (sendHealthChange && oldHealth != health) {
@@ -817,7 +814,7 @@ void Creature::changeHealth(int32_t healthChange, bool sendHealthChange/* = true
 	}
 }
 
-void Creature::gainHealth(Creature* healer, int32_t healthGain)
+void Creature::gainHealth(Creature* healer, int64_t healthGain)
 {
 	changeHealth(healthGain);
 	if (healer) {
@@ -825,7 +822,7 @@ void Creature::gainHealth(Creature* healer, int32_t healthGain)
 	}
 }
 
-void Creature::drainHealth(Creature* attacker, int32_t damage)
+void Creature::drainHealth(Creature* attacker, int64_t damage)
 {
 	changeHealth(-damage, false);
 
@@ -836,7 +833,7 @@ void Creature::drainHealth(Creature* attacker, int32_t damage)
 	}
 }
 
-BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
+BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int64_t& damage,
                                bool checkDefense /* = false */, bool checkArmor /* = false */, bool /* field = false */, bool /* ignoreResistances = false */)
 {
 	BlockType_t blockType = BLOCK_NONE;
@@ -1112,7 +1109,7 @@ void Creature::onAttacked()
 	//
 }
 
-void Creature::onAttackedCreatureDrainHealth(Creature* target, int32_t points)
+void Creature::onAttackedCreatureDrainHealth(Creature* target, int64_t points)
 {
 	target->addDamagePoints(this, points);
 }

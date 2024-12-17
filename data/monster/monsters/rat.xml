@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Rat" nameDescription="a rat" race="blood" experience="5" speed="134" manacost="200">
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Rato" nameDescription="um rato" race="blood" experience="5" speed="134" manacost="200">
 	<health now="20" max="20" />
 	<look type="21" corpse="5964" />
-	<targetchange interval="4000" chance="0" />
+	<targetchange interval="2000" chance="0" />
 	<flags>
 		<flag summonable="1" />
 		<flag attackable="1" />
@@ -15,25 +15,22 @@
 		<flag targetdistance="1" />
 		<flag staticattack="90" />
 		<flag runonhealth="5" />
-		<flag canwalkonenergy="0" />
-		<flag canwalkonfire="0" />
-		<flag canwalkonpoison="0" />
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="0" max="-8" />
+		<attack name="melee" interval="2000" skill="6" attack="10" />
 	</attacks>
-	<defenses armor="1" defense="1" />
+	<defenses armor="1" defense="2" />
 	<elements>
-		<element earthPercent="20" />
-		<element holyPercent="20" />
+		<element earthPercent="25" />
+		<element holyPercent="10" />
 		<element icePercent="-10" />
 		<element deathPercent="-10" />
 	</elements>
-	<voices interval="5000" chance="10">
+	<voices interval="2000" chance="10">
 		<voice sentence="Meep!" />
 	</voices>
 	<loot>
-		<item name="gold coin" countmax="4" chance="100000" />
-		<item id="2696" chance="39410" /><!-- cheese -->
+		<item id="8368" chance="40300" /><!-- cheese -->
+		<item id="2148" countmax="4" chance="44675" /><!-- gold coin -->
 	</loot>
 </monster>

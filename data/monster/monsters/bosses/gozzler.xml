@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Gozzler" nameDescription="a gozzler" race="blood" experience="0" speed="760" manacost="800">
+	<health now="46000000000" max="46000000000" />
+	<look type="313" corpse="9938" />
+	<targetchange interval="4000" chance="8" />
+	
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="1" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-1250000000" max="-1300000000" />
+		<attack name="lifedrain" interval="2000" chance="20" range="7" min="-620000000" max="-650000000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</attack>
+	</attacks>
+	<defenses armor="20" defense="20">
+		<defense name="healing" interval="2000" chance="20" min="42" max="68">
+			<attribute key="areaEffect" value="blueshimmer" />
+		</defense>
+		<defense name="speed" interval="2000" chance="10" speedchange="320" duration="5000">
+			<attribute key="areaEffect" value="redshimmer" />
+		</defense>
+	</defenses>
+	<elements>
+		<element deathPercent="50" />
+		<element holyPercent="50" />
+		<element physicalPercent="-5" />
+	</elements>
+	<immunities>
+		<immunity invisible="1" />
+	</immunities>
+	<voices interval="3500" chance="10">
+		<voice sentence="Huhuhuhuuu!" />
+		<voice sentence="Let the fun begin!" />
+		<voice sentence="Yihahaha!" />
+		<voice sentence="I'll bite you! Nyehehehehe!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="9020" countmax="100" chance="100000" /><!-- Donation Coins -->
+		<item id="6541" countmax="2" chance="50000" /><!-- Exp Eggs -->
+	</loot>
+</monster>

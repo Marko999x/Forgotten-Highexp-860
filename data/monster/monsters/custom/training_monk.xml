@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<monster name="Training Monk" nameDescription="a training monk" race="blood" experience="115" speed="0">
+	<health now="4000000000000" max="4000000000000" />
+	<look type="57" corpse="20371" />
+	<targetchange interval="4000" chance="0" />
+	<flags>
+		<flag summonable="0" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="0" />
+		<flag pushable="0" />
+		<flag canpushitems="1" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="10" />
+		<flag canwalkonenergy="0" />
+		<flag canwalkonfire="0" />
+		<flag canwalkonpoison="0" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="2000" min="0" max="-60" />
+	</attacks>
+    	<immunities>
+		<immunity paralyze="1" />
+		<immunity invisible="1" />
+	</immunities>
+	<!--<elements>
+		<element holyPercent="99" />
+		<element deathPercent="99" />
+		<element earthPercent="99" />
+		<element firePercent="99" />
+		<element icePercent="99" />
+		<element poisonPercent="99" />
+		<element energyPercent="99" />
+	</elements>-->
+	<defenses armor="100" defense="120">
+		<defense name="healing" interval="2000" chance="100" min="2000000000" max="2100000000">
+			<attribute key="areaEffect" value="greenshimmer" />
+		</defense>
+	</defenses>
+	<voices interval="5000" chance="10">
+		<voice sentence="Hugah!" />
+		<voice sentence="Ungh! Ungh!" />
+		<voice sentence="Huaauaauaauaa!" />
+	</voices>
+   <!-- <script>
+        <event name="BestElementalDamageHealthChange" />
+    </script>-->
+</monster>

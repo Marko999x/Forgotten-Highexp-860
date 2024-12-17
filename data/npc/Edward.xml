@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Edward" script="default.lua" walkinterval="2000" floorchange="0">
+	<health now="100" max="100" />
+	<look type="128" head="0" body="124" legs="95" feet="0" addons="1" mount="370" />
+	<parameters>
+		<parameter key="message_greet" value="Hello |PLAYERNAME| I have the following mounts you see in this room, would you like to have {Dromedary}, {Donkey}, {War Bear}, {Boar}, {Midnight}, {Terror Bird}, {Window Queen}, or {Black Sheep} mount?" />
+		<parameter key="message_decline" value="How Rude!" />
+	</parameters>
+</npc>

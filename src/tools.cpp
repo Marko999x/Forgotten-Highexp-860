@@ -334,6 +334,31 @@ int32_t normal_random(int32_t minNumber, int32_t maxNumber)
 	return minNumber + increment;
 }
 
+int64_t normal_random_64(int64_t minNumber, int64_t maxNumber)
+{
+	static std::normal_distribution<float> normalRand(0.5f, 0.25f);
+	if (minNumber == maxNumber) {
+		return minNumber;
+	}
+	else if (minNumber > maxNumber) {
+		std::swap(minNumber, maxNumber);
+	}
+
+	int64_t increment;
+	const int64_t diff = maxNumber - minNumber;
+	const float v = normalRand(getRandomGenerator());
+	if (v < 0.0) {
+		increment = diff / 2;
+	}
+	else if (v > 1.0) {
+		increment = (diff + 1) / 2;
+	}
+	else {
+		increment = round(v * diff);
+	}
+	return minNumber + increment;
+}
+
 bool boolean_random(double probability/* = 0.5*/)
 {
 	static std::bernoulli_distribution booleanRand;
@@ -623,6 +648,19 @@ ShootTypeNames shootTypeNames = {
 	{"smallearth",		CONST_ANI_SMALLEARTH},
 	{"eartharrow",		CONST_ANI_EARTHARROW},
 	{"explosion",		CONST_ANI_EXPLOSION},
+	{"cake",		CONST_ANI_CAKE},
+    {"tarsalarrow", CONST_ANI_TARSALARROW},
+    {"vortexbolt", CONST_ANI_VORTEXBOLT},
+    {"prismaticbolt", CONST_ANI_PRISMATICBOLT},
+    {"crystallinearrow", CONST_ANI_CRYSTALLINEARROW},
+    {"drillbolt", CONST_ANI_DRILLBOLT},
+    {"envenomedarrow", CONST_ANI_ENVENOMEDARROW},
+    {"gloothspear", CONST_ANI_GLOOTHSPEAR},
+    {"simplearrow", CONST_ANI_SIMPLEARROW},
+    {"leafstar", CONST_ANI_LEAFSTAR},
+    {"diamondarrow", CONST_ANI_DIAMONDARROW},
+    {"spectralbolt", CONST_ANI_SPECTRALBOLT},
+    {"royalstar", CONST_ANI_ROYALSTAR},
 };
 
 CombatTypeNames combatTypeNames = {

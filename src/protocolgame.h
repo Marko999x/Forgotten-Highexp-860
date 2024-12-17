@@ -45,7 +45,7 @@ struct TextMessage
 	Position position;
 	uint16_t channelId;
 	struct {
-		int32_t value = 0;
+		int64_t value = 0;
 		TextColor_t color;
 	} primary, secondary;
 
@@ -129,6 +129,8 @@ class ProtocolGame final : public Protocol
 		void parseRevokePartyInvite(NetworkMessage& msg);
 		void parsePassPartyLeadership(NetworkMessage& msg);
 		void parseEnableSharedPartyExperience(NetworkMessage& msg);
+		void parseModalWindowAnswer(NetworkMessage& msg);
+		void parseToggleMount(NetworkMessage& msg);
 
 		//trade methods
 		void parseRequestTrade(NetworkMessage& msg);
@@ -164,6 +166,7 @@ class ProtocolGame final : public Protocol
 		void sendCreatureHealth(const Creature* creature);
 		void sendSkills();
 		void sendPing();
+		void sendPingBack();
 		void sendCreatureTurn(const Creature* creature, uint32_t stackPos);
 		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, const Position* pos = nullptr);
 
@@ -208,6 +211,10 @@ class ProtocolGame final : public Protocol
 
 		void sendCreatureSquare(const Creature* creature, SquareColor_t color);
 
+		void sendSpellCooldown(uint8_t spellId, uint32_t time);
+		void sendSpellGroupCooldown(SpellGroup_t groupId, uint32_t time);
+		void sendUseItemCooldown(uint32_t time);
+
 		//tiles
 		void sendMapDescription(const Position& pos);
 
@@ -232,6 +239,9 @@ class ProtocolGame final : public Protocol
 
 		//inventory
 		void sendInventoryItem(slots_t slot, const Item* item);
+
+		// messages
+		void sendModalWindow(const ModalWindow& modalWindow);
 
 		//Help functions
 
@@ -266,17 +276,20 @@ class ProtocolGame final : public Protocol
 		//otclient
 		void parseExtendedOpcode(NetworkMessage& msg);
 
+		//OTCv8
+		void sendFeatures();
+		
 		friend class Player;
 
 		// Helpers so we don't need to bind every time
 		template <typename Callable, typename... Args>
-		void addGameTask(Callable&& function, Args&&... args) {
-			g_dispatcher.addTask(createTask(std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...)));
+		void addGameTaskWithStats(Callable&& function, const std::string& function_str, const std::string& extra_info, Args&&... args) {
+			g_dispatcher.addTask(createTaskWithStats(std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...), function_str, extra_info));
 		}
 
 		template <typename Callable, typename... Args>
-		void addGameTaskTimed(uint32_t delay, Callable&& function, Args&&... args) {
-			g_dispatcher.addTask(createTask(delay, std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...)));
+		void addGameTaskTimedWithStats(uint32_t delay, Callable&& function, const std::string& function_str, const std::string& extra_info, Args&&... args) {
+			g_dispatcher.addTask(createTaskWithStats(delay, std::bind(std::forward<Callable>(function), &g_game, std::forward<Args>(args)...), function_str, extra_info));
 		}
 
 		std::unordered_set<uint32_t> knownCreatureSet;
@@ -290,6 +303,8 @@ class ProtocolGame final : public Protocol
 
 		bool debugAssertSent = false;
 		bool acceptPackets = false;
+
+		uint16_t otclientV8 = 0;
 };
 
 #endif

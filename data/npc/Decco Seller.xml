@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Decco Seller" script="parcel.lua" walkinterval="1" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="138" head="20" body="33" legs="43" feet="7" addons="0"/>
+	<parameters>
+		<parameter key="module_shop" value="1"/>
+		<parameter key="shop_buyable" value="blood herb,2798,500;cocosnut,2678,50;black pearl,2144,500;white pearl,2143,500;box,1738,100;talon,2151,2000"/>"/>
+
+	</parameters>
+</npc>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Cursed Upgrader" script="cursed_upgrader.lua" walkinterval="2000" floorchange="0">
+    <health now="100" max="100" />
+    <look type="332" head="0" body="0" legs="0" feet="0" addons="0" />
+	<parameters>
+		<parameter key="message_greet" value="Welcome |PLAYERNAME|. I can {upgrade} your cursed vial" />
+		<parameter key="message_walkaway" value="How rude!" />
+	</parameters>
+</npc>

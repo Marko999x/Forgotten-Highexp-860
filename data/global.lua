@@ -67,6 +67,139 @@ closedLevelDoors = {
 	10789, 12095, 12102, 12195, 12204
 }
 
+function Game.setCountdown(position, seconds, callback, rawseconds)
+
+    rawseconds = rawseconds or seconds
+    if not seconds or seconds <= 0 then
+        return
+    end
+
+    -- # if callback returns false, countdown will be interrupted
+    if callback and (callback(position, seconds) == false) then
+        return 
+    end
+
+    local m = math.floor(seconds / 60)
+    local s = seconds % 60
+    local c = TEXTCOLOR_GREEN
+
+    if (seconds <= math.ceil(rawseconds * 0.33)) then
+        c = TEXTCOLOR_RED
+    elseif (seconds <= math.ceil(rawseconds * 0.66)) then
+        c = TEXTCOLOR_ORANGE
+    end
+
+    local output = m .. "m " .. s .. "s"
+    if not Game.sendAnimatedText then
+        local spectators = Game.getSpectators(position, true, true, 7, 7, 5, 5)
+        for i = 1, #spectators do
+            spectators[i]:say(output, TALKTYPE_MONSTER_SAY, true, spectators[i], position)
+        end
+    else
+        Game.sendAnimatedText(output, position, c)
+    end
+
+    addEvent(Game.setCountdown, 1000, position, seconds - 1, callback, rawseconds)
+end
+
+function Player.getZnotePoints(self)
+    local query = db.storeQuery("SELECT `points` FROM `znote_accounts` WHERE `id` = " .. self:getAccountId())
+    if not query then
+        return false
+    end
+
+    local value = result.getNumber(query, "points")
+    result.free(query)
+    return value
+end
+
+function Player.getPremiumPoints(self)
+    local query = db.storeQuery("SELECT `premium_points` FROM `accounts` WHERE `id` = " .. self:getAccountId())
+    if not query then
+        return false
+    end
+
+    local value = result.getNumber(query, "premium_points")
+    result.free(query)
+    return value
+end
+
+function Player.setExhaustion(self, value, time)
+    self:setStorageValue(value, time + os.time())
+end
+
+function Player.getExhaustion(self, value)
+    local storage = self:getStorageValue(value)
+    if not storage or storage <= os.time() then
+        return 0
+    end
+
+    return storage - os.time()
+end
+
+function Player:hasExhaustion(value)
+    return self:getExhaustion(value) >= os.time() and true or false
+end
+
+function formatDamage(damage)
+  local BILLION  = 1000000000
+  local MILLION  = 1000000
+  local THOUSAND = 1000
+
+  local divisor =
+    damage >= BILLION   and BILLION   or
+    damage >= MILLION   and MILLION   or
+    THOUSAND
+	
+	if THOUSAND < 1000 then
+		return
+	end
+
+  return string.format("%.2f"..(
+    divisor == BILLION and " B" or
+    divisor == MILLION and " M" or " K"),
+    damage/divisor)
+end
+
+function customTimer(pos, count, color)
+    Game.sendAnimatedText(count, pos, color)
+
+    count = count - 1
+    if count > 0 then
+        addEvent(customTimer, 1000, pos, count, color)
+    end
+end
+
+function isInRange(position, fromPosition, toPosition)
+	return (position.x >= fromPosition.x and position.y >= fromPosition.y and position.z >= fromPosition.z and position.x <= toPosition.x and position.y <= toPosition.y and position.z <= toPosition.z)
+end
+
+function getProtectionAll(item)
+    local absorbPercents = item:getType():getAbilities()['absorbPercent']
+    local count = absorbPercents[1]
+    if count ~= 0 then
+        for index = 2, 12 do
+            if absorbPercents[index] ~= count then
+                return 0
+            end
+        end
+    end
+
+    return count
+end
+
+function getPlayerProtectionAll(player)
+    local count = 0
+    for slot = CONST_SLOT_HEAD, CONST_SLOT_AMMO do
+        local item = player:getSlotItem(slot)
+        if item then
+            count = count + getProtectionAll(item)
+        end
+    end
+
+    return count
+end
+
 function getDistanceBetween(firstPosition, secondPosition)
 	local xDif = math.abs(firstPosition.x - secondPosition.x)
 	local yDif = math.abs(firstPosition.y - secondPosition.y)

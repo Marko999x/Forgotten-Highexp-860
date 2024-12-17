@@ -49,8 +49,8 @@ class Weapons final : public BaseEvents
 		void loadDefaults();
 		const Weapon* getWeapon(const Item* item) const;
 
-		static int32_t getMaxMeleeDamage(int32_t attackSkill, int32_t attackValue);
-		static int32_t getMaxWeaponDamage(uint32_t level, int32_t attackSkill, int32_t attackValue, float attackFactor);
+		static int64_t getMaxMeleeDamage(int32_t attackSkill, int32_t attackValue);
+		static int64_t getMaxWeaponDamage(uint32_t level, int32_t attackSkill, int32_t attackValue, float attackFactor);
 
 		bool registerLuaEvent(Weapon* event);
 		void clear(bool fromLua) override final;
@@ -84,8 +84,8 @@ class Weapon : public Event
 		static bool useFist(Player* player, Creature* target);
 		virtual bool useWeapon(Player* player, Item* item, Creature* target) const;
 
-		virtual int32_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const = 0;
-		virtual int32_t getElementDamage(const Player* player, const Creature* target, const Item* item) const = 0;
+		virtual int64_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const = 0;
+		virtual int64_t getElementDamage(const Player* player, const Creature* target, const Item* item) const = 0;
 		virtual CombatType_t getElementType() const = 0;
 
 		uint16_t getID() const {
@@ -245,8 +245,8 @@ class WeaponMelee final : public Weapon
 
 		bool useWeapon(Player* player, Item* item, Creature* target) const override;
 
-		int32_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
-		int32_t getElementDamage(const Player* player, const Creature* target, const Item* item) const override;
+		int64_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
+		int64_t getElementDamage(const Player* player, const Creature* target, const Item* item) const override;
 		CombatType_t getElementType() const override { return elementType; }
 
 	private:
@@ -268,8 +268,8 @@ class WeaponDistance final : public Weapon
 
 		bool useWeapon(Player* player, Item* item, Creature* target) const override;
 
-		int32_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
-		int32_t getElementDamage(const Player* player, const Creature* target, const Item* item) const override;
+		int64_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
+		int64_t getElementDamage(const Player* player, const Creature* target, const Item* item) const override;
 		CombatType_t getElementType() const override { return elementType; }
 
 	private:
@@ -287,8 +287,8 @@ class WeaponWand final : public Weapon
 		bool configureEvent(const pugi::xml_node& node) override;
 		void configureWeapon(const ItemType& it) override;
 
-		int32_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
-		int32_t getElementDamage(const Player*, const Creature*, const Item*) const override { return 0; }
+		int64_t getWeaponDamage(const Player* player, const Creature* target, const Item* item, bool maxDamage = false) const override;
+		int64_t getElementDamage(const Player*, const Creature*, const Item*) const override { return 0; }
 		CombatType_t getElementType() const override { return COMBAT_NONE; }
 
 		void setMinChange(int32_t change) {
@@ -304,8 +304,8 @@ class WeaponWand final : public Weapon
 			return false;
 		}
 
-		int32_t minChange = 0;
-		int32_t maxChange = 0;
+		int64_t minChange = 0;
+		int64_t maxChange = 0;
 };
 
 #endif

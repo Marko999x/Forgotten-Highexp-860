@@ -216,6 +216,7 @@ class LuaScriptInterface
 		int32_t loadFile(const std::string& file, Npc* npc = nullptr);
 
 		const std::string& getFileById(int32_t scriptId);
+		const std::string& getFileByIdForStats(int32_t scriptId);
 		int32_t getEvent(const std::string& eventName);
 		int32_t getEvent();
 		int32_t getMetaEvent(const std::string& globalName, const std::string& eventName);
@@ -307,6 +308,27 @@ class LuaScriptInterface
 			}
 			return getNumber<T>(L, arg);
 		}
+		template<typename T>
+		static typename std::enable_if<std::is_enum<T>::value, T>::type
+			getNumber(lua_State* L, int64_t arg)
+		{
+			return static_cast<T>(static_cast<int64_t>(lua_tonumber(L, arg)));
+		}
+		template<typename T>
+		static typename std::enable_if<std::is_integral<T>::value || std::is_floating_point<T>::value, T>::type
+			getNumber(lua_State* L, int64_t arg)
+		{
+			return static_cast<T>(lua_tonumber(L, arg));
+		}
+		template<typename T>
+		static T getNumber(lua_State* L, int64_t arg, T defaultValue)
+		{
+			const auto parameters = lua_gettop(L);
+			if (parameters == 0 || arg > parameters) {
+				return defaultValue;
+			}
+			return getNumber<T>(L, arg);
+		}
 		template<class T>
 		static T* getUserdata(lua_State* L, int32_t arg)
 		{
@@ -359,6 +381,13 @@ class LuaScriptInterface
 			return getNumber<T>(L, -1);
 		}
 
+		template <typename T, typename... Args>
+		static T getField(lua_State* L, int32_t arg, const std::string& key, T&& defaultValue)
+		{
+			lua_getfield(L, arg, key.c_str());
+			return getNumber<T>(L, -1, std::forward<T>(defaultValue));
+		}
+	
 		static std::string getFieldString(lua_State* L, int32_t arg, const std::string& key);
 
 		static LuaDataType getUserdataType(lua_State* L, int32_t arg);
@@ -675,6 +704,34 @@ class LuaScriptInterface
 		static int luaNetworkMessageSkipBytes(lua_State* L);
 		static int luaNetworkMessageSendToPlayer(lua_State* L);
 
+        // ModalWindow
+		static int luaModalWindowCreate(lua_State* L);
+		static int luaModalWindowDelete(lua_State* L);
+
+		static int luaModalWindowGetId(lua_State* L);
+		static int luaModalWindowGetTitle(lua_State* L);
+		static int luaModalWindowGetMessage(lua_State* L);
+
+		static int luaModalWindowSetTitle(lua_State* L);
+		static int luaModalWindowSetMessage(lua_State* L);
+
+		static int luaModalWindowGetButtonCount(lua_State* L);
+		static int luaModalWindowGetChoiceCount(lua_State* L);
+
+		static int luaModalWindowAddButton(lua_State* L);
+		static int luaModalWindowAddChoice(lua_State* L);
+
+		static int luaModalWindowGetDefaultEnterButton(lua_State* L);
+		static int luaModalWindowSetDefaultEnterButton(lua_State* L);
+
+		static int luaModalWindowGetDefaultEscapeButton(lua_State* L);
+		static int luaModalWindowSetDefaultEscapeButton(lua_State* L);
+
+		static int luaModalWindowHasPriority(lua_State* L);
+		static int luaModalWindowSetPriority(lua_State* L);
+
+		static int luaModalWindowSendToPlayer(lua_State* L);
+
 		// Item
 		static int luaItemCreate(lua_State* L);
 
@@ -883,6 +940,15 @@ class LuaScriptInterface
 		static int luaPlayerGetSpecialSkill(lua_State* L);
 		static int luaPlayerAddSpecialSkill(lua_State* L);
 
+		static int luaPlayerAddOfflineTrainingTime(lua_State* L);
+		static int luaPlayerGetOfflineTrainingTime(lua_State* L);
+		static int luaPlayerRemoveOfflineTrainingTime(lua_State* L);
+
+		static int luaPlayerAddOfflineTrainingTries(lua_State* L);
+
+		static int luaPlayerGetOfflineTrainingSkill(lua_State* L);
+		static int luaPlayerSetOfflineTrainingSkill(lua_State* L);
+
 		static int luaPlayerGetItemCount(lua_State* L);
 		static int luaPlayerGetItemById(lua_State* L);
 
@@ -949,6 +1015,10 @@ class LuaScriptInterface
 		static int luaPlayerCanWearOutfit(lua_State* L);
 		static int luaPlayerSendOutfitWindow(lua_State* L);
 
+		static int luaPlayerAddMount(lua_State* L);
+		static int luaPlayerRemoveMount(lua_State* L);
+		static int luaPlayerHasMount(lua_State* L);
+
 		static int luaPlayerGetPremiumEndsAt(lua_State* L);
 		static int luaPlayerSetPremiumEndsAt(lua_State* L);
 
@@ -987,6 +1057,13 @@ class LuaScriptInterface
 		static int luaPlayerHasChaseMode(lua_State* L);
 		static int luaPlayerHasSecureMode(lua_State* L);
 		static int luaPlayerGetFightMode(lua_State* L);
+		
+		static int luaPlayerGetReborn(lua_State* L);
+		static int luaPlayerSetReborn(lua_State* L);
+		static int luaPlayerDoReborn(lua_State* L);
+		
+		static int luaPlayerSendCreatureSquare(lua_State* L);
+
 
 		// Monster
 		static int luaMonsterCreate(lua_State* L);
@@ -996,6 +1073,7 @@ class LuaScriptInterface
 		static int luaMonsterGetType(lua_State* L);
 
 		static int luaMonsterRename(lua_State* L);
+		static int luaMonsterSetMasterPosition(lua_State* L);
 
 		static int luaMonsterGetSpawnPosition(lua_State* L);
 		static int luaMonsterIsInSpawnRange(lua_State* L);
@@ -1022,6 +1100,8 @@ class LuaScriptInterface
 
 		static int luaMonsterIsWalkingToSpawn(lua_State* L);
 		static int luaMonsterWalkToSpawn(lua_State* L);
+		static int luaMonsterGetMonsterExp(lua_State* L);
+		static int luaMonsterSetMonsterExp(lua_State* L);
 
 		// Npc
 		static int luaNpcCreate(lua_State* L);
@@ -1151,6 +1231,7 @@ class LuaScriptInterface
 		static int luaItemTypeIsMagicField(lua_State* L);
 		static int luaItemTypeIsUseable(lua_State* L);
 		static int luaItemTypeIsPickupable(lua_State* L);
+		static int luaItemTypeIsRotatable(lua_State* L);
 
 		static int luaItemTypeGetType(lua_State* L);
 		static int luaItemTypeGetGroup(lua_State* L);
@@ -1158,6 +1239,7 @@ class LuaScriptInterface
 		static int luaItemTypeGetClientId(lua_State* L);
 		static int luaItemTypeGetName(lua_State* L);
 		static int luaItemTypeGetPluralName(lua_State* L);
+		static int luaItemTypeGetRotateTo(lua_State* L);
 		static int luaItemTypeGetArticle(lua_State* L);
 		static int luaItemTypeGetDescription(lua_State* L);
 		static int luaItemTypeGetSlotPosition(lua_State *L);
@@ -1394,6 +1476,7 @@ class LuaScriptInterface
 		static int luaSpellCooldown(lua_State* L);
 		static int luaSpellGroupCooldown(lua_State* L);
 		static int luaSpellLevel(lua_State* L);
+		static int luaSpellReborn(lua_State* L);
 		static int luaSpellMagicLevel(lua_State* L);
 		static int luaSpellMana(lua_State* L);
 		static int luaSpellManaPercent(lua_State* L);

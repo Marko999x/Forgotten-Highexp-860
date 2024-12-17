@@ -141,6 +141,16 @@ enum OperatingSystem_t : uint8_t {
 	CLIENTOS_OTCLIENT_LINUX = 10,
 	CLIENTOS_OTCLIENT_WINDOWS = 11,
 	CLIENTOS_OTCLIENT_MAC = 12,
+
+	// by default OTCv8 uses CLIENTOS_WINDOWS for backward compatibility
+	// for correct value enable g_game.enableFeature(GameExtendedOpcode)
+	// in modules/game_features/features.lua
+	CLIENTOS_OTCLIENTV8_LINUX = 20,
+	CLIENTOS_OTCLIENTV8_WINDOWS = 21,
+	CLIENTOS_OTCLIENTV8_MAC = 22,
+	CLIENTOS_OTCLIENTV8_ANDROID = 23,
+	CLIENTOS_OTCLIENTV8_IOS = 24,
+	CLIENTOS_OTCLIENTV8_WEB = 25
 };
 
 enum SpellGroup_t : uint8_t {
@@ -290,6 +300,8 @@ enum skills_t : uint8_t {
 
 	SKILL_MAGLEVEL = 7,
 	SKILL_LEVEL = 8,
+	
+	SKILL_REBORN = 9,
 
 	SKILL_FIRST = SKILL_FIST,
 	SKILL_LAST = SKILL_FISHING
@@ -352,7 +364,9 @@ enum ConditionType_t {
 	CONDITION_CURSED = 1 << 22,
 	CONDITION_EXHAUST_COMBAT = 1 << 23, // unused
 	CONDITION_EXHAUST_HEAL = 1 << 24, // unused
-	CONDITION_PACIFIED = 1 << 25
+	CONDITION_PACIFIED = 1 << 25,
+	CONDITION_SPELLCOOLDOWN = 1 << 26,
+	CONDITION_SPELLGROUPCOOLDOWN = 1 << 27,
 };
 
 enum ConditionId_t : int8_t {
@@ -485,6 +499,7 @@ enum MapMark_t
 struct Outfit_t {
 	uint16_t lookType = 0;
 	uint16_t lookTypeEx = 0;
+	uint16_t lookMount = 0;
 	uint8_t lookHead = 0;
 	uint8_t lookBody = 0;
 	uint8_t lookLegs = 0;
@@ -494,7 +509,7 @@ struct Outfit_t {
 
 struct LightInfo {
 	uint8_t level = 0;
-	uint8_t color = 0;
+	uint8_t color = 215;
 	constexpr LightInfo() = default;
 	constexpr LightInfo(uint8_t level, uint8_t color) : level(level), color(color) {}
 };
@@ -562,7 +577,9 @@ struct ModalWindow
 	uint8_t defaultEnterButton = 0xFF, defaultEscapeButton = 0xFF;
 	bool priority = false;
 
-	ModalWindow(uint32_t id, std::string title, std::string message): title(std::move(title)), message(std::move(message)), id(id) {}
+	ModalWindow(uint32_t id, std::string title, std::string message) :
+	    title(std::move(title)), message(std::move(message)), id(id)
+	{}
 };
 
 enum CombatOrigin
@@ -579,7 +596,7 @@ struct CombatDamage
 {
 	struct {
 		CombatType_t type = COMBAT_NONE;
-		int32_t value = 0;
+		int64_t value = 0;
 	} primary = {}, secondary = {};
 
 	CombatOrigin origin = ORIGIN_NONE;

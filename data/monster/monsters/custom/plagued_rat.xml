@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<monster name="Plagued Rat" nameDescription="a plagued rat" race="blood" experience="10" speed="150" manacost="250">
+	<health now="400000000" max="400000000" />
+	<look type="56" corpse="5964" />
+	<targetchange interval="2000" chance="0" />
+	
+	<flags>
+		<flag summonable="1" />
+		<flag attackable="1" />
+		<flag hostile="1" />
+		<flag illusionable="1" />
+		<flag convinceable="1" />
+		<flag pushable="1" />
+		<flag canpushitems="0" />
+		<flag canpushcreatures="0" />
+		<flag targetdistance="1" />
+		<flag staticattack="90" />
+		<flag runonhealth="3" />
+	</flags>
+	<attacks>
+		<attack name="melee" interval="1000" min="-7000000" max="-8000000" />
+	</attacks>
+	<defenses armor="1" defense="3" />
+	<elements>
+		<element firePercent="-10" />
+	</elements>
+	<voices interval="2000" chance="10">
+		<voice sentence="Meeeeep!" />
+		<voice sentence="Meep!" />
+	</voices>
+	<loot>
+		<item id="9020" countmax="1" chance="10000" /><!-- Donation Coins -->
+	</loot>
+</monster>

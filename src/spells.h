@@ -127,18 +127,10 @@ class Spell : public BaseSpell
 		Spell() = default;
 
 		bool configureSpell(const pugi::xml_node& node);
-		const std::string& getName() const {
-			return name;
-		}
-		void setName(std::string n) {
-			name = n;
-		}
-		uint8_t getId() const {
-			return spellId;
-		}
-		void setId(uint8_t id) {
-			spellId = id;
-		}
+		const std::string& getName() const { return name; }
+		void setName(std::string n) { name = n; }
+		uint8_t getId() const { return spellId; }
+		void setId(uint8_t id) { spellId = id; }
 
 		void postCastSpell(Player* player, bool finishedCast = true, bool payCost = true) const;
 		static void postCastSpell(Player* player, uint32_t manaCost, uint32_t soulCost);
@@ -155,6 +147,12 @@ class Spell : public BaseSpell
 		}
 		void setLevel(uint32_t lvl) {
 			level = lvl;
+		}
+		uint32_t getReborn() const {
+			return reborn;
+		}
+		void setReborn(uint32_t reb) {
+			reborn = reb;
 		}
 		uint32_t getMagicLevel() const {
 			return magLevel;
@@ -202,37 +200,17 @@ class Spell : public BaseSpell
 			vocSpellMap[n] = b;
 		}
 
-		const SpellGroup_t getGroup() const {
-			return group;
-		}
-		void setGroup(SpellGroup_t g) {
-			group = g;
-		}
-		const SpellGroup_t getSecondaryGroup() const {
-			return secondaryGroup;
-		}
-		void setSecondaryGroup(SpellGroup_t g) {
-			secondaryGroup = g;
-		}
-		uint32_t getSecondaryCooldown() const {
-			return secondaryGroupCooldown;
-		}
-		void setSecondaryCooldown(uint32_t cd) {
-			secondaryGroupCooldown = cd;
-		}
-		uint32_t getGroupCooldown() const {
-			return groupCooldown;
-		}
-		void setGroupCooldown(uint32_t cd) {
-			groupCooldown = cd;
-		}
+		SpellGroup_t getGroup() const { return group; }
+		void setGroup(SpellGroup_t g) { group = g; }
+		SpellGroup_t getSecondaryGroup() const { return secondaryGroup; }
+		void setSecondaryGroup(SpellGroup_t g) { secondaryGroup = g; }
 
-		uint32_t getCooldown() const {
-			return cooldown;
-		}
-		void setCooldown(uint32_t cd) {
-			cooldown = cd;
-		}
+		uint32_t getCooldown() const { return cooldown; }
+		void setCooldown(uint32_t cd) { cooldown = cd; }
+		uint32_t getSecondaryCooldown() const { return secondaryGroupCooldown; }
+		void setSecondaryCooldown(uint32_t cd) { secondaryGroupCooldown = cd; }
+		uint32_t getGroupCooldown() const { return groupCooldown; }
+		void setGroupCooldown(uint32_t cd) { groupCooldown = cd; }
 
 		int32_t getRange() const {
 			return range;
@@ -302,10 +280,11 @@ class Spell : public BaseSpell
 		SpellGroup_t group = SPELLGROUP_NONE;
 		SpellGroup_t secondaryGroup = SPELLGROUP_NONE;
 
+		uint32_t cooldown = 1000;
 		uint32_t groupCooldown = 1000;
 		uint32_t secondaryGroupCooldown = 0;
-		uint32_t cooldown = 1000;
 		uint32_t level = 0;
+		uint32_t reborn = 0;
 		uint32_t magLevel = 0;
 		int32_t range = -1;
 

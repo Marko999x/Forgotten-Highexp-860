@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Ring Seller" script="rings.lua" walkinterval="2000" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="132" head="78" body="112" legs="112" feet="58"/>
+	<parameters>
+		    <parameter key="message_greet" value="Ahh come in look and buy! I can sell you rings of different kinds." />
+		<parameter key="module_keywords" value="1" />
+		<parameter key="keywords" value="quest;help;item;offer" />
+		<parameter key="keyword_reply1" value="Rings will be needed at quests around the world to succes! Buy some." />
+		<parameter key="keyword_reply2" value="Rings is what I do, they are always good to have in hand." />
+		<parameter key="keyword_reply3" value="Well I got Sword Rings 200gp, Club Rings 200gp, Axe Rings 200gp, Power Rings 200gp, Energy Rings 200gp, Time Rings 1000gp, Life Ring 1500gp and Might Rings 2000gp." />
+		<parameter key="keyword_reply4" value="Well I got Sword Rings 200gp, Club Rings 200gp, Axe Rings 200gp, Power Rings 200gp, Energy Rings 200gp, Time Rings 1000gp, Life Ring 1500gp and Might Rings 2000gp." />
+	</parameters>
+</npc>

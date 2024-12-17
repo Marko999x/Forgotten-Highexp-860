@@ -642,6 +642,7 @@ void Player::addStorageValue(const uint32_t key, const int32_t value, const bool
 				value & 0xFF
 			);
 			return;
+			} else if (IS_IN_KEYRANGE(key, MOUNTS_RANGE)) {
 		} else {
 			std::cout << "Warning: unknown reserved key: " << key << " player: " << getName() << std::endl;
 			return;
@@ -821,6 +822,7 @@ void Player::sendStats()
 {
 	if (client) {
 		client->sendStats();
+		lastStatsTrainingTime = getOfflineTrainingTime() / 60 / 1000;
 	}
 }
 
@@ -1046,7 +1048,7 @@ void Player::onCreatureAppear(Creature* creature, bool isLogin)
 		}
 
 		// load mount speed bonus
-		/*uint16_t currentMountId = currentOutfit.lookMount;
+		uint16_t currentMountId = currentOutfit.lookMount;
 		if (currentMountId != 0) {
 			Mount* currentMount = g_game.mounts.getMountByClientID(currentMountId);
 			if (currentMount && hasMount(currentMount)) {
@@ -1059,7 +1061,6 @@ void Player::onCreatureAppear(Creature* creature, bool isLogin)
 
 		// mounted player moved to pz on login, update mount status
 		onChangeZone(getZone());
-		*/
 
 		if (g_config.getBoolean(ConfigManager::PLAYER_CONSOLE_LOGS)) {
 			std::cout << name << " has logged in." << std::endl;
@@ -1106,9 +1107,20 @@ void Player::onChangeZone(ZoneType_t zone)
 			setAttackedCreature(nullptr);
 			onAttackedCreatureDisappear(false);
 		}
+
+		if (!group->access && isMounted()) {
+			//dismount();
+			g_game.internalCreatureChangeOutfit(this, defaultOutfit);
+			wasMounted = true;
+		}
+	}else {
+		if (wasMounted) {
+			toggleMount(true);
+			wasMounted = false;
+		}
 	}
 
-	g_game.updateCreatureWalkthrough(this);
+	//g_game.updateCreatureWalkthrough(this);
 	sendIcons();
 }
 
@@ -1161,7 +1173,7 @@ void Player::onRemoveCreature(Creature* creature, bool isLogout)
 		clearPartyInvitations();
 
 		if (party) {
-			party->leaveParty(this);
+			party->leaveParty(this, true);
 		}
 
 		g_chat->removeUserFromAllChannels(*this);
@@ -1250,6 +1262,18 @@ void Player::onCreatureMove(Creature* creature, const Tile* newTile, const Posit
 		if (tradePartner && !Position::areInRange<2, 2, 0>(tradePartner->getPosition(), getPosition())) {
 			g_game.internalCloseTrade(this);
 		}
+	}
+
+	// close modal windows
+	if (!modalWindows.empty()) {
+		// TODO: This shouldn't be hard-coded
+		for (uint32_t modalWindowId : modalWindows) {
+			if (modalWindowId == std::numeric_limits<uint32_t>::max()) {
+				sendTextMessage(MESSAGE_EVENT_ADVANCE, "Offline training aborted.");
+				break;
+			}
+		}
+		modalWindows.clear();
 	}
 
 	if (party) {
@@ -1440,6 +1464,11 @@ void Player::onThink(uint32_t interval)
 	if (g_game.getWorldType() != WORLD_TYPE_PVP_ENFORCED) {
 		checkSkullTicks(interval / 1000);
 	}
+
+	addOfflineTrainingTime(interval);
+	if (lastStatsTrainingTime != getOfflineTrainingTime() / 60 / 1000) {
+		sendStats();
+	}
 }
 
 uint32_t Player::isMuted() const
@@ -1489,13 +1518,13 @@ void Player::removeMessageBuffer()
 	}
 }
 
-void Player::drainHealth(Creature* attacker, int32_t damage)
+void Player::drainHealth(Creature* attacker, int64_t damage)
 {
 	Creature::drainHealth(attacker, damage);
 	sendStats();
 }
 
-void Player::drainMana(Creature* attacker, int32_t manaLoss)
+void Player::drainMana(Creature* attacker, int64_t manaLoss)
 {
 	onAttacked();
 	changeMana(-manaLoss);
@@ -1601,9 +1630,17 @@ void Player::removeManaSpent(uint64_t amount, bool notify/* = false*/)
 
 void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = false*/)
 {
+	uint32_t maxLevel = g_config.getNumber(ConfigManager::REBORN_SCALE_3) + (std::floor(reborn / g_config.getNumber(ConfigManager::REBORN_SCALE_2)) * g_config.getNumber(ConfigManager::REBORN_SCALE_1));
+	if (level == maxLevel) {
+		levelPercent = 0;
+		sendStats();
+		return;
+	}
+
 	uint64_t currLevelExp = Player::getExpForLevel(level);
 	uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
 	uint64_t rawExp = exp;
+	
 	if (currLevelExp >= nextLevelExp) {
 		//player has reached max level
 		levelPercent = 0;
@@ -1624,8 +1661,6 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		TextMessage message(MESSAGE_STATUS_DEFAULT, "You gained " + expString);
 		sendTextMessage(message);
 
-		g_game.addAnimatedText(std::to_string(exp), position, TEXTCOLOR_WHITE);
-
 		SpectatorVec spectators;
 		g_game.map.getSpectators(spectators, position, false, true);
 		spectators.erase(this);
@@ -1637,27 +1672,33 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 			}
 		}
 	}
-
+	
 	uint32_t prevLevel = level;
 	while (experience >= nextLevelExp) {
-		++level;
+		if (level >= maxLevel || (g_config.getBoolean(ConfigManager::PLAYER_INSTANT_REBORN) && level == maxLevel)) {
+            //player has reached max level
+            break;
+        }
+		++level;		
+
 		healthMax += vocation->getHPGain();
 		health += vocation->getHPGain();
 		manaMax += vocation->getManaGain();
 		mana += vocation->getManaGain();
-		capacity += vocation->getCapGain();
+		//capacity += vocation->getCapGain();
+
 
 		currLevelExp = nextLevelExp;
 		nextLevelExp = Player::getExpForLevel(level + 1);
-		if (currLevelExp >= nextLevelExp) {
+		if (currLevelExp >= nextLevelExp || (g_config.getBoolean(ConfigManager::PLAYER_INSTANT_REBORN) && level == maxLevel)) {
 			//player has reached max level
 			break;
 		}
 	}
 
 	if (prevLevel != level) {
-		health = getMaxHealth();
-		mana = getMaxMana();
+		//health = getMaxHealth();
+		//mana = getMaxMana();
 
 		updateBaseSpeed();
 		setBaseSpeed(getBaseSpeed());
@@ -1677,12 +1718,20 @@ void Player::addExperience(Creature* source, uint64_t exp, bool sendText/* = fal
 		g_creatureEvents->playerAdvance(this, SKILL_LEVEL, prevLevel, level);
 
 		sendTextMessage(MESSAGE_EVENT_ADVANCE, fmt::format("You advanced from Level {:d} to Level {:d}.", prevLevel, level));
+
 	}
 
 	if (nextLevelExp > currLevelExp) {
 		levelPercent = Player::getPercentLevel(experience - currLevelExp, nextLevelExp - currLevelExp);
 	} else {
 		levelPercent = 0;
+	}
+
+	if (g_config.getBoolean(ConfigManager::PLAYER_INSTANT_REBORN)) {
+		if (level >= maxLevel) {
+			doReborn(1);
+			return;
+		}
 	}
 	sendStats();
 }
@@ -1707,9 +1756,10 @@ void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
 		std::string expString = std::to_string(lostExp) + (lostExp != 1 ? " experience points." : " experience point.");
 
 		TextMessage message(MESSAGE_STATUS_DEFAULT, "You lost " + expString);
+		message.position = position;
+		message.primary.value = lostExp;
+		message.primary.color = TEXTCOLOR_RED;
 		sendTextMessage(message);
-
-		g_game.addAnimatedText(std::to_string(lostExp), position, TEXTCOLOR_RED);
 
 		SpectatorVec spectators;
 		g_game.map.getSpectators(spectators, position, false, true);
@@ -1726,11 +1776,11 @@ void Player::removeExperience(uint64_t exp, bool sendText/* = false*/)
 	uint32_t oldLevel = level;
 	uint64_t currLevelExp = Player::getExpForLevel(level);
 
-	while (level > 1 && experience < currLevelExp) {
+	while (level > 8 && experience < currLevelExp) {
 		--level;
-		healthMax = std::max<int32_t>(0, healthMax - vocation->getHPGain());
-		manaMax = std::max<int32_t>(0, manaMax - vocation->getManaGain());
-		capacity = std::max<int32_t>(0, capacity - vocation->getCapGain());
+		healthMax = std::max<int64_t>(0, healthMax - vocation->getHPGain());
+		manaMax = std::max<int64_t>(0, manaMax - vocation->getManaGain());
+		//capacity = std::max<int64_t>(0, capacity - vocation->getCapGain());
 		currLevelExp = Player::getExpForLevel(level);
 	}
 
@@ -1834,7 +1884,7 @@ bool Player::hasShield() const
 	return false;
 }
 
-BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
+BlockType_t Player::blockHit(Creature* attacker, CombatType_t combatType, int64_t& damage,
                              bool checkDefense /* = false*/, bool checkArmor /* = false*/, bool field /* = false*/, bool ignoreResistances /* = false*/)
 {
 	BlockType_t blockType = Creature::blockHit(attacker, combatType, damage, checkDefense, checkArmor, field, ignoreResistances);
@@ -1948,20 +1998,33 @@ void Player::death(Creature* lastHitCreature)
 
 		if (expLoss != 0) {
 			uint32_t oldLevel = level;
+			uint32_t oldReborn = reborn;
 
 			if (vocation->getId() == VOCATION_NONE || level > 7) {
 				experience -= expLoss;
 			}
 
-			while (level > 1 && experience < Player::getExpForLevel(level)) {
+			while (level > 8 && experience < Player::getExpForLevel(level)) {
 				--level;
-				healthMax = std::max<int32_t>(0, healthMax - vocation->getHPGain());
-				manaMax = std::max<int32_t>(0, manaMax - vocation->getManaGain());
-				capacity = std::max<int32_t>(0, capacity - vocation->getCapGain());
+				healthMax = std::max<int64_t>(0, healthMax - vocation->getHPGain());
+				manaMax = std::max<int64_t>(0, manaMax - vocation->getManaGain());
+				//capacity = std::max<int64_t>(0, capacity - vocation->getCapGain());
 			}
 
 			if (oldLevel != level) {
 				sendTextMessage(MESSAGE_EVENT_ADVANCE, fmt::format("You were downgraded from Level {:d} to Level {:d}.", oldLevel, level));
+			}
+
+			if (g_config.getBoolean(ConfigManager::PLAYER_LOSE_REBORN) && level <= g_config.getNumber(ConfigManager::PLAYER_LOSE_REBORN_LEVEL) && oldReborn > 0) {
+				--reborn;
+
+				uint32_t maxLevel = g_config.getNumber(ConfigManager::REBORN_SCALE_3) + (std::floor(reborn / g_config.getNumber(ConfigManager::REBORN_SCALE_2)) * g_config.getNumber(ConfigManager::REBORN_SCALE_1));
+				//addExperience(nullptr, Player::getExpForLevel(600000), false);
+				removeExperience(experience, false);
+				level = maxLevel;
+				experience = Player::getExpForLevel(level);
+				removeExperience((experience - Player::getExpForLevel(normal_random(600000,700000))), false);
+				sendTextMessage(MESSAGE_EVENT_ADVANCE, fmt::format("You were downgraded from reborn {:d} to {:d}.", oldReborn, reborn));
 			}
 
 			uint64_t currLevelExp = Player::getExpForLevel(level);
@@ -2073,18 +2136,6 @@ Item* Player::getCorpse(Creature* lastHitCreature, Creature* mostDamageCreature)
 		}
 	}
 	return corpse;
-}
-
-void Player::addCombatExhaust(uint32_t ticks)
-{
-	Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_EXHAUST_COMBAT, ticks, 0);
-	addCondition(condition);
-}
-
-void Player::addHealExhaust(uint32_t ticks)
-{
-	Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_EXHAUST_HEAL, ticks, 0);
-	addCondition(condition);
 }
 
 void Player::addInFightTicks(bool pzlock /*= false*/)
@@ -3267,6 +3318,9 @@ void Player::updateItemsLight(bool internal /*=false*/)
 void Player::onAddCondition(ConditionType_t type)
 {
 	Creature::onAddCondition(type);
+	if (type == CONDITION_OUTFIT && isMounted()) {
+		dismount();
+	}
 	sendIcons();
 }
 
@@ -3440,7 +3494,7 @@ void Player::onPlacedCreature()
 	}
 }
 
-void Player::onAttackedCreatureDrainHealth(Creature* target, int32_t points)
+void Player::onAttackedCreatureDrainHealth(Creature* target, int64_t points)
 {
 	Creature::onAttackedCreatureDrainHealth(target, points);
 
@@ -3455,7 +3509,7 @@ void Player::onAttackedCreatureDrainHealth(Creature* target, int32_t points)
 	}
 }
 
-void Player::onTargetCreatureGainHealth(Creature* target, int32_t points)
+void Player::onTargetCreatureGainHealth(Creature* target, int64_t points)
 {
 	if (target && party) {
 		Player* tmpPlayer = nullptr;
@@ -3575,19 +3629,19 @@ bool Player::lastHitIsPlayer(Creature* lastHitCreature)
 	return lastHitMaster && lastHitMaster->getPlayer();
 }
 
-void Player::changeHealth(int32_t healthChange, bool sendHealthChange/* = true*/)
+void Player::changeHealth(int64_t healthChange, bool sendHealthChange/* = true*/)
 {
 	Creature::changeHealth(healthChange, sendHealthChange);
 	sendStats();
 }
 
-void Player::changeMana(int32_t manaChange)
+void Player::changeMana(int64_t manaChange)
 {
 	if (!hasFlag(PlayerFlag_HasInfiniteMana)) {
 		if (manaChange > 0) {
-			mana += std::min<int32_t>(manaChange, getMaxMana() - mana);
+			mana += std::min<int64_t>(manaChange, getMaxMana() - mana);
 		} else {
-			mana = std::max<int32_t>(0, mana + manaChange);
+			mana = std::max<int64_t>(0, mana + manaChange);
 		}
 	}
 
@@ -4052,7 +4106,6 @@ GuildEmblems_t Player::getGuildEmblem(const Player* player) const
 	return GUILDEMBLEM_NEUTRAL;
 }
 
-/*
 uint8_t Player::getCurrentMount() const
 {
 	int32_t value;
@@ -4079,10 +4132,10 @@ bool Player::toggleMount(bool mount)
 			return false;
 		}
 
-		if (!group->access && tile->hasFlag(TILESTATE_PROTECTIONZONE)) {
-			sendCancelMessage(RETURNVALUE_ACTIONNOTPERMITTEDINPROTECTIONZONE);
-			return false;
-		}
+	//	if (!group->access && tile->hasFlag(TILESTATE_PROTECTIONZONE)) {
+	//		sendCancelMessage(RETURNVALUE_ACTIONNOTPERMITTEDINPROTECTIONZONE);
+	//		return false;
+	//	}
 
 		const Outfit* playerOutfit = Outfits::getInstance().getOutfitByLookType(getSex(), defaultOutfit.lookType);
 		if (!playerOutfit) {
@@ -4339,32 +4392,6 @@ bool Player::addOfflineTrainingTries(skills_t skill, uint64_t tries)
 	return sendUpdate;
 }
 
-bool Player::hasModalWindowOpen(uint32_t modalWindowId) const
-{
-	return find(modalWindows.begin(), modalWindows.end(), modalWindowId) != modalWindows.end();
-}
-
-void Player::onModalWindowHandled(uint32_t modalWindowId)
-{
-	modalWindows.remove(modalWindowId);
-}
-
-void Player::sendModalWindow(const ModalWindow& modalWindow)
-{
-	if (!client) {
-		return;
-	}
-
-	modalWindows.push_front(modalWindow.id);
-	client->sendModalWindow(modalWindow);
-}
-
-void Player::clearModalWindows()
-{
-	modalWindows.clear();
-}
-*/
-
 uint16_t Player::getHelpers() const
 {
 	uint16_t helpers;
@@ -4394,6 +4421,25 @@ uint16_t Player::getHelpers() const
 
 	return helpers;
 }
+
+bool Player::hasModalWindowOpen(uint32_t modalWindowId) const
+{
+	return find(modalWindows.begin(), modalWindows.end(), modalWindowId) != modalWindows.end();
+}
+
+void Player::onModalWindowHandled(uint32_t modalWindowId) { modalWindows.remove(modalWindowId); }
+
+void Player::sendModalWindow(const ModalWindow& modalWindow)
+{
+	if (!client) {
+		return;
+	}
+
+	modalWindows.push_front(modalWindow.id);
+	client->sendModalWindow(modalWindow);
+}
+
+void Player::clearModalWindows() { modalWindows.clear(); }
 
 void Player::sendClosePrivate(uint16_t channelId)
 {
@@ -4517,4 +4563,57 @@ void Player::updateRegeneration()
 		condition->setParam(CONDITION_PARAM_MANAGAIN, vocation->getManaGainAmount());
 		condition->setParam(CONDITION_PARAM_MANATICKS, vocation->getManaGainTicks() * 1000);
 	}
+}
+
+void Player::doReborn(uint16_t value, bool removeExp /*= true*/)
+{
+	uint16_t oldReborn = reborn;
+	uint16_t newReborn = oldReborn + value;
+
+	if (newReborn > oldReborn) {
+		while (reborn < newReborn) {
+			setReborn(reborn + 1);
+
+			health = healthMax;
+			mana = manaMax;
+
+			g_creatureEvents->playerAdvance(this, SKILL_REBORN, oldReborn, newReborn);
+		}
+	}
+	else {
+		while (reborn > newReborn) {
+			setReborn(reborn - 1);
+
+			health = healthMax;
+			mana = manaMax;
+		}
+	}
+
+	if (removeExp) {
+		uint32_t oldLevel = level;
+		level = 8;
+		experience = 4200;
+
+		updateBaseSpeed();
+		setBaseSpeed(getBaseSpeed());
+
+		g_game.changeSpeed(this, 0);
+		g_game.addCreatureHealth(this);
+
+		const uint32_t protectionLevel = static_cast<uint32_t>(g_config.getNumber(ConfigManager::PROTECTION_LEVEL));
+		if (oldLevel >= protectionLevel && level < protectionLevel) {
+			g_game.updateCreatureWalkthrough(this);
+		}
+
+		uint64_t currLevelExp = Player::getExpForLevel(level);
+		uint64_t nextLevelExp = Player::getExpForLevel(level + 1);
+		if (nextLevelExp > currLevelExp) {
+			levelPercent = Player::getPercentLevel(experience - currLevelExp, nextLevelExp - currLevelExp);
+		}
+		else {
+			levelPercent = 0;
+		}
+	}
+
+	sendStats();
 }

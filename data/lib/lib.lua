@@ -7,3 +7,8 @@ dofile('data/lib/compat/compat.lua')
 -- Debugging helper function for Lua developers
 dofile('data/lib/debugging/dump.lua')
 dofile('data/lib/debugging/lua_version.lua')
+
+function Combat.setCallbackFunction(self, event, callback)
+    temporaryGlobalCallbackFunction = loadstring(string.dump(callback))
+    self:setCallback(event, "temporaryGlobalCallbackFunction")
+end

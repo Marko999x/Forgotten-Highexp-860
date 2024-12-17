@@ -106,7 +106,7 @@ function Creature:addSummon(monster)
 	summon:setSkillLoss(false)
 	summon:setMaster(self)
 	summon:getPosition():notifySummonAppear(summon)
-
+	summon:registerEvent('SummonTp')
 	return true
 end
 
@@ -173,4 +173,8 @@ function Creature:canAccessPz()
 		return false
 	end
 	return true
+end
+
+function Creature.getMonster(self)
+	return self:isMonster() and self or nil
 end

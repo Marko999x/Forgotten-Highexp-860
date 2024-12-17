@@ -208,7 +208,13 @@ bool Item::equals(const Item* otherItem) const
 	const auto& attributeList = attributes->attributes;
 	const auto& otherAttributeList = otherAttributes->attributes;
 	for (const auto& attribute : attributeList) {
-		if (ItemAttributes::isStrAttrType(attribute.type)) {
+		if (ItemAttributes::isIntAttrType(attribute.type)) {
+			for (const auto& otherAttribute : otherAttributeList) {
+				if (attribute.type == otherAttribute.type && attribute.value.integer != otherAttribute.value.integer) {
+					return false;
+				}
+			}
+		} else if (ItemAttributes::isStrAttrType(attribute.type)) {
 			for (const auto& otherAttribute : otherAttributeList) {
 				if (attribute.type == otherAttribute.type && *attribute.value.string != *otherAttribute.value.string) {
 					return false;
@@ -216,7 +222,7 @@ bool Item::equals(const Item* otherItem) const
 			}
 		} else {
 			for (const auto& otherAttribute : otherAttributeList) {
-				if (attribute.type == otherAttribute.type && attribute.value.integer != otherAttribute.value.integer) {
+				if (attribute.type == otherAttribute.type && *attribute.value.custom != *otherAttribute.value.custom) {
 					return false;
 				}
 			}
@@ -943,7 +949,10 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance,
 					s << ", Hit%" << std::showpos << static_cast<int16_t>(hitChance) << std::noshowpos;
 				}
 			} else {
-				s << " (Atk:" << attack << ", Def:" << defense;
+				s << " (Atk:" << attack;
+				if (defense != 0) {
+					s << ", Def:" << defense;
+				}
 			}
 
 			begin = false;
@@ -1597,8 +1606,7 @@ bool Item::canDecay() const
 		return false;
 	}
 
-	const ItemType& it = Item::items[id];
-	if (getDecayTo() < 0 || it.decayTime == 0) {
+	if (getDecayTo() < 0 || getDecayTime() == 0) {
 		return false;
 	}
 
