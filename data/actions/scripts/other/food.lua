@@ -85,7 +85,6 @@ local foods = {
 	[12416] = {10, "Munch."}, -- aubergine
 	[12417] = {8, "Crunch."}, -- broccoli
 	[12418] = {9, "Crunch."}, -- cauliflower
-	[12637] = {55, "Gulp."}, -- ectoplasmic sushi
 	[12638] = {18, "Yum."}, -- dragonfruit
 	[12639] = {2, "Munch."}, -- peas
 }

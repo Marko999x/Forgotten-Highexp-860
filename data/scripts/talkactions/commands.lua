@@ -1,7 +1,7 @@
 local talk = TalkAction("/commands", "!commands")
 
 function talk.onSay(player, words, param)
-	player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE,
+	player:sendTextMessage(MESSAGE_STATUS_CONSOLE_BLUE, "[Commands]" .. "\n"
                 .. "!buypremium" .. "\n"
                 .. "!buyhouse" .. "\n"
                 .. "!sellhouse" .. "\n"

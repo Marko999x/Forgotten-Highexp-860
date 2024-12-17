@@ -43,7 +43,7 @@ function manarune.onUse(player, item, fromPosition, target, toPosition, isHotkey
     return true
 end
 
-manarune:id(2276)
+manarune:id(2275)
 manarune:allowFarUse(true)
 manarune:register()
 ---------------------------------------------------------------------------------------------------

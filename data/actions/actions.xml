@@ -37,7 +37,6 @@
 	<action fromid="5812" toid="5813" script="other/decayto.lua" />
 	<action itemid="7183" script="other/decayto.lua" />
 	<action itemid="10719" script="other/decayto.lua" />
-	<action itemid="11401" script="other/decayto.lua" />
 
 	<!-- Food -->
 	<action itemid="2362" script="other/food.lua" />
@@ -66,7 +65,7 @@
 	<action itemid="11370" script="other/food.lua" />
 	<action itemid="11429" script="other/food.lua" />
 	<action fromid="12415" toid="12418" script="other/food.lua" />
-	<action fromid="12637" toid="12639" script="other/food.lua" />
+	<action fromid="12638" toid="12639" script="other/food.lua" />
 
 	<!-- Music -->
 	<action fromid="2070" toid="2085" script="other/music.lua" />
