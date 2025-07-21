@@ -2311,9 +2311,9 @@ void ProtocolGame::AddPlayerStats(NetworkMessage& msg)
 
 	msg.add<uint32_t>(player->getFreeCapacity());
 
-	msg.add<uint32_t>(std::min<uint32_t>(player->getLevel(), 0x7FFFFFFF));
+	msg.add<uint32_t>(player->getExperience());
 
-	msg.add<uint16_t>(player->getReborn());
+	msg.add<uint16_t>(player->getLevel());
 	msg.addByte(player->getLevelPercent());
 
 	uint64_t mpPc = std::ceil((uint64_t)player->getMana() * 100 / (uint64_t)player->getMaxMana());
@@ -2525,7 +2525,6 @@ void ProtocolGame::sendFeatures()
 
 	std::map<GameFeature, bool> features;
 	// place for non-standard OTCv8 features
-	features[GameExtendedOpcode] = true;
 
 	if(features.empty())
 		return;
