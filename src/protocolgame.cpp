@@ -2525,7 +2525,6 @@ void ProtocolGame::sendFeatures()
 
 	std::map<GameFeature, bool> features;
 	// place for non-standard OTCv8 features
-	features[GameExtendedOpcode] = true;
 
 	if(features.empty())
 		return;
