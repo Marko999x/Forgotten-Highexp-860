@@ -21,7 +21,7 @@
 #define FS_DEFINITIONS_H_877452FEC245450C9F96B8FD268D8963
 
 static constexpr auto STATUS_SERVER_NAME = "Forgotten Highexp";
-static constexpr auto STATUS_SERVER_VERSION = "TFS 0.4 SVN_";
+static constexpr auto STATUS_SERVER_VERSION = "TFS 1.5 Downgraded by Nekiro. Edited by Marko999x and Pox";
 static constexpr auto STATUS_SERVER_DEVELOPERS = "Administrator";
 
 static constexpr auto CLIENT_VERSION_MIN = 860;

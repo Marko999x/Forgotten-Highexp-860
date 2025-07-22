@@ -57,7 +57,7 @@ timeBetweenExActions = 100
 
 -- Map
 -- NOTE: set mapName WITHOUT .otbm at the end
-mapName = "theend"
+mapName = "forgotten"
 mapAuthor = "Administrator"
 
 -- Market
